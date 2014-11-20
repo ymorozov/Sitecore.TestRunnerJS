@@ -47,6 +47,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SpeakTest\assets\chai.js" />
+    <Content Include="SpeakTest\assets\mocha.js" />
+    <Content Include="SpeakTest\assets\sinon.js" />
     <Content Include="SpeakTest\bootstrap.js" />
   </ItemGroup>
   <ItemGroup>
