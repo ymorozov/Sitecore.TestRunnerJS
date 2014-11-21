@@ -10,7 +10,7 @@
   {
     private object _previousValue;
 
-    private const string bootstrapModulePath = "/SpeakTest/bootstrap.js";
+    private const string bootstrapModulePath = "/SpeakTest/bootstrapper.js";
 
     private const string requireJSSettingName = "Speak.Html.RequireJSBackwardCompatibilityFile";
 
