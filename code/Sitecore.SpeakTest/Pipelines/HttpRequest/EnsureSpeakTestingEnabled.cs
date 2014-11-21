@@ -10,31 +10,27 @@
   {
     private object _previousValue;
 
-    private const string bootstrapModulePath = "/SpeakTest/bootstrapper.js";
-
-    private const string requireJSSettingName = "Speak.Html.RequireJSBackwardCompatibilityFile";
-
     public override void Process(HttpRequestArgs args)
     {
       if (WebUtil.GetQueryString("sc_speaktest") != "1")
       {
         if (WebUtil.GetQueryString("sc_speaktest") == "0" && _previousValue != null)
         {
-          this.GetSettings()[requireJSSettingName] = _previousValue;
+          this.GetSettings()[ConfigSettings.RequireJSSettingName] = _previousValue;
           Context.Diagnostics.Debugging = false;
         }
 
         return;
       }
 
-      if (Settings.GetSetting(requireJSSettingName) == bootstrapModulePath)
+      if (Settings.GetSetting(ConfigSettings.RequireJSSettingName) == ConfigSettings.BootstrapModulePath)
       {
         return;
       }
 
       var settings = this.GetSettings();
-      _previousValue = settings[requireJSSettingName];
-      settings[requireJSSettingName] = bootstrapModulePath;
+      _previousValue = settings[ConfigSettings.RequireJSSettingName];
+      settings[ConfigSettings.RequireJSSettingName] = ConfigSettings.BootstrapModulePath;
       Context.Diagnostics.Debugging = true;
     }
 
