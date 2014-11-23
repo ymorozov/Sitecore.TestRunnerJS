@@ -13,5 +13,10 @@
     {
       get { return Settings.GetSetting("SpeakTest.RequireJSSettingName", "Speak.Html.RequireJSBackwardCompatibilityFile"); }
     }
+
+    public static string RootTestFixturesFolder
+    {
+      get { return Settings.GetSetting("SpeakTest.RootTestFixturesFolder", "/SpeakTest/Tests"); }
+    }
   }
 }
