@@ -60,6 +60,7 @@
     <Compile Include="WebApiConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SpeakTest\assets\fakeserver.js" />
     <Content Include="SpeakTest\assets\testsnotfound.js" />
     <Content Include="SpeakTest\assets\chai.js" />
     <Content Include="SpeakTest\assets\mocha.js" />

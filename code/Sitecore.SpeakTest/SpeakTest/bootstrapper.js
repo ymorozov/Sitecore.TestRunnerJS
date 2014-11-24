@@ -7,7 +7,8 @@
     paths: {
       mocha: 'mocha',
       chai: 'chai',
-      sinon: 'sinon'
+      sinon: 'sinon',
+      fakeServer: 'fakeserver'
     },
   });
 
