@@ -7,12 +7,13 @@
     paths: {
       mocha: 'mocha',
       chai: 'chai',
-      sinon: 'sinon',
-      tests: 'tests'
+      sinon: 'sinon'
     },
   });
 
-  require(['require', 'chai', 'mocha', 'sinon'], function (require, chai) {
+  require.config({ paths: { tests: '/testspeak/testfixture/getbyurl?url=' + window.location } });
+
+  require(['require', 'chai', 'mocha', 'sinon', 'tests'], function (require, chai) {
     expect = chai.expect;
     mocha.setup('bdd');
 

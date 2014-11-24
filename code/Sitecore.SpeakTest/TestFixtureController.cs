@@ -31,16 +31,22 @@
 
           if (File.Exists(testFixturePath))
           {
-            var result = new HttpResponseMessage(HttpStatusCode.OK);
-            var stream = new FileStream(testFixturePath, FileMode.Open);
-            result.Content = new StreamContent(stream);
-            result.Content.Headers.ContentType = new MediaTypeHeaderValue("text/javascript");
-            return result;
+            return this.GetResponseMessage(testFixturePath);
           }
         }
       }
 
-      return new HttpResponseMessage(HttpStatusCode.NotFound);
+      var notFoundPath = HostingEnvironment.MapPath("~/speaktest/assets/testsnotfound.js");
+      return this.GetResponseMessage(notFoundPath);
+    }
+
+    private HttpResponseMessage GetResponseMessage(string testFixturePath)
+    {
+      var result = new HttpResponseMessage(HttpStatusCode.OK);
+      var stream = new FileStream(testFixturePath, FileMode.Open);
+      result.Content = new StreamContent(stream);
+      result.Content.Headers.ContentType = new MediaTypeHeaderValue("text/javascript");
+      return result;
     }
   }
 }
