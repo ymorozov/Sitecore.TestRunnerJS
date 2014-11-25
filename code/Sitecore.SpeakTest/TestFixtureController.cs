@@ -13,7 +13,8 @@
     [HttpGet]
     public HttpResponseMessage GetByUrl(string url)
     {
-      var applicationUrlParts = url.Split(new[] { @"/sitecore/client/applications/" }, StringSplitOptions.RemoveEmptyEntries);
+      var normalizedUrl = url.ToLowerInvariant();
+      var applicationUrlParts = normalizedUrl.Split(new[] { @"/sitecore/client/applications/" }, StringSplitOptions.RemoveEmptyEntries);
 
       if (applicationUrlParts.Length == 2)
       {
@@ -23,11 +24,10 @@
 
         if (applicationUrlParameterParts.Length >= 2)
         {
-          var applicationName = applicationUrlParameterParts[0];
-          var pageName = applicationUrlParameterParts[1];
+          var pageRelativePath = string.Join(@"/", applicationUrlParameterParts);
 
           var testFixturePath = HostingEnvironment.MapPath(
-            "~/" + ConfigSettings.RootTestFixturesFolder + "/" + applicationName + "/" + pageName + ".js");
+            "~/" + ConfigSettings.RootTestFixturesFolder + "/" + pageRelativePath + ".js");
 
           if (File.Exists(testFixturePath))
           {
