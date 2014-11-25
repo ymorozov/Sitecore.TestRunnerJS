@@ -1,5 +1,5 @@
 ﻿(function () {
-  require(['sinon'], function () {
+  define(['sinon'], function () {
     var server = sinon.fakeServer.create();
     server.xhr.useFilters = true;
     server.autoRespond = true;
