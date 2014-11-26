@@ -8,7 +8,8 @@
       mocha: baseUrl + 'mocha',
       chai: baseUrl + 'chai',
       sinon: baseUrl + 'sinon',
-      fakeServer: baseUrl + 'fakeserver'
+      fakeServer: baseUrl + 'fakeserver',
+      loca: baseUrl + 'loca'
     },
   });
 
@@ -19,7 +20,7 @@
     mocha.setup('bdd');
 
     require(['/-/speak/v1/assets/main.js'], function () {
-      require(['tests', 'jquery'], function (tests, $) {
+      require(['tests', 'jquery', 'loca'], function (tests, $) {
         if (!tests) {
           return;
         }
@@ -31,7 +32,7 @@
             if (window.mochaPhantomJS) {
               mochaPhantomJS.run();
             } else {
-              $('.sc-applicationContent').append($("<div id='mocha'/>"));
+              mocha.reporter(mocha.WebKit);
               mocha.run();
             }
             testsWasRun = true;
