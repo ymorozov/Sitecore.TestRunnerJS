@@ -23,6 +23,7 @@
         return;
       }
 
+      Context.Diagnostics.Debugging = true;
       if (Settings.GetSetting(ConfigSettings.RequireJSSettingName) == ConfigSettings.BootstrapModulePath)
       {
         return;
@@ -31,7 +32,6 @@
       var settings = this.GetSettings();
       _previousValue = settings[ConfigSettings.RequireJSSettingName];
       settings[ConfigSettings.RequireJSSettingName] = ConfigSettings.BootstrapModulePath;
-      Context.Diagnostics.Debugging = true;
     }
 
     private Hashtable GetSettings()
