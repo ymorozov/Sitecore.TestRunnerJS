@@ -5,25 +5,36 @@
   using System.Net;
   using System.Net.Http;
   using System.Net.Http.Headers;
+  using System.Web;
   using System.Web.Hosting;
   using System.Web.Http;
 
   public class TestFixtureController : ApiController
   {
+    private const string TestFixtureParameterName = "sc_testfixture";
+
     [HttpGet]
     public HttpResponseMessage GetByUrl(string url)
     {
-      var normalizedUrl = url.ToLowerInvariant();
-      var applicationUrlParts = normalizedUrl.Split(new[] { @"/sitecore/client/applications/" }, StringSplitOptions.RemoveEmptyEntries);
+      var uri = new Uri(url);
+      var queryParameters = HttpUtility.ParseQueryString(uri.Query);
+
+      var normalizedUrl = uri.LocalPath.ToLowerInvariant();
+      var applicationUrlParts = normalizedUrl.Split(new[] { @"/sitecore/client/applications/" }, StringSplitOptions.None);
 
       if (applicationUrlParts.Length == 2)
       {
         var applicationUrlPart = applicationUrlParts[1];
-        var applicationUrlPartWithoutQuery = applicationUrlPart.Split('?')[0];
-        var applicationUrlParameterParts = applicationUrlPartWithoutQuery.Split('/');
+        var applicationUrlParameterParts = applicationUrlPart.Split('/');
 
         if (applicationUrlParameterParts.Length >= 2)
         {
+          var testFixtureParameter = queryParameters.Get(TestFixtureParameterName);
+          if (!string.IsNullOrEmpty(testFixtureParameter))
+          {
+            applicationUrlParameterParts[applicationUrlParameterParts.Length - 1] = testFixtureParameter;
+          }
+
           var pageRelativePath = string.Join(@"/", applicationUrlParameterParts);
 
           var testFixturePath = HostingEnvironment.MapPath(
