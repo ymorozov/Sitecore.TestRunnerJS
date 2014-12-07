@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <title></title>
+  <script type="text/javascript">
+    function loadjs(a) {
+      var b = document.createElement("script");
+      b.setAttribute("type", "text/javascript");
+      b.setAttribute("src", a);
+      document.getElementsByTagName("head")[0].appendChild(b);
+    }
+
+    function getQueryParameter(name) {
+      name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+      var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+          results = regex.exec(document.location.search);
+      return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+
+    var appName = getQueryParameter("app");
+    loadjs("/SpeakTest/tests/" + appName + ".js");
+  </script>
+</head>
+<body>
+
+</body>
+</html>

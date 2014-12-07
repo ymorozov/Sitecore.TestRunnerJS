@@ -67,6 +67,8 @@
     <Content Include="SpeakTest\assets\mocha.js" />
     <Content Include="SpeakTest\assets\sinon.js" />
     <Content Include="SpeakTest\bootstrapper.js" />
+    <Content Include="SpeakTest\phantom\loader.js" />
+    <Content Include="SpeakTest\phantom\settings.html" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App_Config\Include\Sitecore.SpeakTest.config" />

@@ -19,7 +19,7 @@
     mocha.setup('bdd');
 
     require(['/-/speak/v1/assets/main.js'], function () {
-      require(['tests', 'jquery', 'loca'], function (tests, $) {
+      require(['tests', 'jquery'], function (tests, $) {
         if (!tests) {
           return;
         }
@@ -41,8 +41,10 @@
             if (window.mochaPhantomJS) {
               mochaPhantomJS.run();
             } else {
-              mocha.reporter(mocha.WebKit);
-              mocha.run();
+              require(['loca'], function() {
+                mocha.reporter(mocha.WebKit);
+                mocha.run();
+              });
             }
           }
         }
