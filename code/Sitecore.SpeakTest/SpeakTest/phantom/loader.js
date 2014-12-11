@@ -11,8 +11,8 @@
   USAGE = "Usage: phantomjs mocha-phantomjs.coffee URL REPORTER [CONFIG]";
 
   Reporter = (function () {
-    function Reporter(reporter, config, url) {
-      this.reporter = reporter;
+    function Reporter(config, url) {
+      this.reporter = config.reporter;
       this.config = config;
       this.checkStarted = __bind(this.checkStarted, this);
       this.waitForRunMocha = __bind(this.waitForRunMocha, this);
@@ -345,12 +345,11 @@
       phantom.exit(-1);
     }
 
-    reporter = 'report.js';
-
     config = JSON.parse(system.args[3] || '{}');
     config.cookies = loginCookies;
 
     config.verbose = false;
+    config.reporter = 'report.js';
 
     if (config.hooks) {
       config.hooks = require(config.hooks);
@@ -362,7 +361,7 @@
       var testPage = "http://" + instanceName + testPages[i];
       console.log('Testing page: ' + testPage);
 
-      mocha = new Reporter(reporter, config, testPage);
+      mocha = new Reporter(config, testPage);
       mocha.run();
     }
   }
