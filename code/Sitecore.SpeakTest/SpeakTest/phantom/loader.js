@@ -23,6 +23,8 @@
       this.mochaStartWait = this.config.timeout || 20000;
       this.startTime = Date.now();
       this.output = this.config.file ? fs.open(this.config.file, 'w') : system.stdout;
+      this.testsComplete = false;
+      this.testResults = null;
       if (!this.url) {
         this.fail(USAGE);
       }
@@ -51,16 +53,22 @@
       if (msg) {
         console.log(msg);
       }
-      return phantom.exit(errno || 1);
+      this.testsComplete = true;
+      //return phantom.exit(errno || 1);
     };
 
     Reporter.prototype.finish = function () {
       if (this.config.file) {
         this.output.close();
       }
-      return phantom.exit(this.page.evaluate(function () {
-        return mochaPhantomJS.failures;
-      }));
+      this.testsComplete = true;
+      this.testResults = this.page.evaluate(function () {
+        return mochaPhantomJS.stats;
+      });
+
+      //return phantom.exit(this.page.evaluate(function () {
+      //  return mochaPhantomJS.failures;
+      //}));
     };
 
     Reporter.prototype.initPage = function () {
@@ -298,28 +306,33 @@
 
   })();
 
-  var testPages = null;
   var instanceName = system.args[1];
   var applicationName = system.args[2];
+  var testResults = { fail: 0, pass: 0, total: 0 };
 
   var settingsPage = webpage.create();
   settingsPage.open("http://" + instanceName + "/speaktest/phantom/settings.html?app=" + applicationName, function () {
     console.log('Loading test settings.');
 
-    testPages = settingsPage.evaluate(function () {
+    testPagesResult = settingsPage.evaluate(function () {
       return testPages;
     });
 
-    if (testPages) {
+    if (testPagesResult) {
       console.log('Test settings was loaded.');
-      loginIntoSitecore(testPages);
+
+      var pagesUnderTest = [];
+      for (var i = 0; i < testPagesResult.length; i++) {
+        pagesUnderTest.push(testPagesResult[i]);
+      }
+      loginIntoSitecore(pagesUnderTest);
     } else {
       console.log('Error loading test settings. Test execution terminated!');
       phantom.exit(-1);
     }
   });
 
-  function loginIntoSitecore(testPages) {
+  function loginIntoSitecore(pagesUnderTest) {
     var loginPageUrl = "http://" + instanceName + "/sitecore/login";
     var loginPage = webpage.create();
     loginPage.open(loginPageUrl, "post", { n: "" }, function () {
@@ -328,7 +341,7 @@
       loginPage.onLoadFinished = function () {
         console.log('Launch pad page loaded! Url: ' + loginPage.url);
 
-        beginTestExecution(loginPage.cookies, testPages);
+        beginTestExecution(loginPage.cookies, pagesUnderTest);
       };
 
       loginPage.evaluate(function () {
@@ -339,7 +352,7 @@
     });
   }
 
-  function beginTestExecution(loginCookies, testPages) {
+  function beginTestExecution(loginCookies, pagesUnderTest) {
     if (phantom.version.major < 1 || (phantom.version.major === 1 && phantom.version.minor < 9)) {
       console.log('mocha-phantomjs requires PhantomJS > 1.9.1');
       phantom.exit(-1);
@@ -357,12 +370,36 @@
       config.hooks = {};
     }
 
-    for (var i = 0; i < testPages.length; i++) {
-      var testPage = "http://" + instanceName + testPages[i];
-      console.log('Testing page: ' + testPage);
+    runTestsOnPages(pagesUnderTest);
+  }
 
-      mocha = new Reporter(config, testPage);
-      mocha.run();
+  function runTestsOnPages(pagesUnderTest) {
+    if (pagesUnderTest.length > 0) {
+      var testPage = "http://" + instanceName + pagesUnderTest[0];
+      pagesUnderTest.splice(0, 1);
+
+      console.log('Testing page: ' + testPage);
+      var runner = new Reporter(config, testPage);
+      runner.run();
+
+      waitForTestEnd(runner, function () { runTestsOnPages(pagesUnderTest); });
+    } else {
+      console.log('Tests execution was finished.');
+      console.log('Passed: ' + testResults.pass + ' Failed: ' + testResults.fail + ' Total: ' + testResults.total);
+
+      phantom.exit(testResults.fail > 0 ? -1 : 1);
+    }
+  }
+
+  function waitForTestEnd(runner, callback) {
+    if (runner.testsComplete) {
+      testResults.total = runner.testResults.total;
+      testResults.pass = runner.testResults.pass;
+      testResults.fail = runner.testResults.fail;
+
+      callback();
+    } else {
+      setTimeout(function () { waitForTestEnd(runner, callback); }, 50);
     }
   }
 }).call(this);

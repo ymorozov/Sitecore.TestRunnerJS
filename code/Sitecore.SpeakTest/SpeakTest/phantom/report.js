@@ -38,9 +38,9 @@ function FAP(runner) {
   });
 
   runner.on('end', function () {
-    log('# tests ' + (passes + failures));
-    log('# pass ' + passes);
-    log('# fail ' + failures);
+    mochaPhantomJS.stats.fail = failures;
+    mochaPhantomJS.stats.pass = passes;
+    mochaPhantomJS.stats.total = passes + failures;
   });
 }
 

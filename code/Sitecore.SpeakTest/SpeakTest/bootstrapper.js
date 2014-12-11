@@ -32,16 +32,17 @@
 
         function testRunner() {
           bindingSeenTimeDelta = new Date().getTime() - lastBindingSeenTime;
-          
+
           if (bindingSeenTimeDelta > 2000) {
             window.clearInterval(taskId);
-            
+
             console.log('Running tests.');
 
             if (window.mochaPhantomJS) {
+              mochaPhantomJS.stats = { fail: 0, pass: 0, total: 0 };
               mochaPhantomJS.run();
             } else {
-              require(['loca'], function() {
+              require(['loca'], function () {
                 mocha.reporter(mocha.WebKit);
                 mocha.run();
               });
@@ -60,7 +61,7 @@
                 || arg.lastIndexOf("Requiring files:", 0) === 0
                 || arg.lastIndexOf("Requiring page code:", 0) === 0
                 || arg.lastIndexOf("initialize -", 0) === 0) {
-                
+
                 lastBindingSeenTime = new Date().getTime();
 
                 if (!runnerIsStarted) {
