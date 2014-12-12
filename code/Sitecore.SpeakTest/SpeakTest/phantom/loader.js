@@ -393,9 +393,9 @@
 
   function waitForTestEnd(runner, callback) {
     if (runner.testsComplete) {
-      testResults.total = runner.testResults.total;
-      testResults.pass = runner.testResults.pass;
-      testResults.fail = runner.testResults.fail;
+      testResults.total += runner.testResults.total;
+      testResults.pass += runner.testResults.pass;
+      testResults.fail += runner.testResults.fail;
 
       callback();
     } else {
