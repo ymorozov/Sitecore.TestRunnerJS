@@ -1,4 +1,5 @@
-﻿var Base = require('./base')
+﻿/// <reference path="../assets/loca.js" />
+var Base = require('./base')
   , cursor = Base.cursor
   , color = Base.color;
 
@@ -15,7 +16,7 @@ function FAP(runner) {
 
   runner.on('start', function () {
     var total = runner.grepTotal(runner.suite);
-    log('Total tests: ' + total);
+    log('Total tests on page: ' + total);
   });
 
   runner.on('test end', function () {
@@ -23,17 +24,17 @@ function FAP(runner) {
   });
 
   runner.on('pending', function (test) {
-    log('SKIP' + title(test));
+    log('[SKIP]' + title(test));
   });
 
   runner.on('pass', function (test) {
     passes++;
-    log('PASS ' + title(test));
+    log('[PASS] ' + title(test));
   });
 
   runner.on('fail', function (test, err) {
     failures++;
-    log('FAIL ', title(test));
+    log('[FAIL] ' + title(test));
     if (err.stack) log(err.stack.replace(/^/gm, '  '));
   });
 

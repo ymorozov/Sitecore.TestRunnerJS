@@ -68,6 +68,7 @@
     <Content Include="SpeakTest\assets\sinon.js" />
     <Content Include="SpeakTest\bootstrapper.js" />
     <Content Include="SpeakTest\phantom\loader.js" />
+    <Content Include="SpeakTest\phantom\report.js" />
     <Content Include="SpeakTest\phantom\settings.html" />
   </ItemGroup>
   <ItemGroup>
