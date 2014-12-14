@@ -54,6 +54,7 @@
         console.log(msg);
       }
       this.testsComplete = true;
+      throw { message: msg, code: errno };
       //return phantom.exit(errno || 1);
     };
 
@@ -392,14 +393,18 @@
   }
 
   function waitForTestEnd(runner, callback) {
-    if (runner.testsComplete) {
-      testResults.total += runner.testResults.total;
-      testResults.pass += runner.testResults.pass;
-      testResults.fail += runner.testResults.fail;
+    try {
+      if (runner.testsComplete) {
+        testResults.total += runner.testResults.total;
+        testResults.pass += runner.testResults.pass;
+        testResults.fail += runner.testResults.fail;
 
-      callback();
-    } else {
-      setTimeout(function () { waitForTestEnd(runner, callback); }, 50);
+        callback();
+      } else {
+        setTimeout(function() { waitForTestEnd(runner, callback); }, 50);
+      }
+    } catch(e)  {
+      return phantom.exit(e.code || 1);
     }
   }
 }).call(this);
