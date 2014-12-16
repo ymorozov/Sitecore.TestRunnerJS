@@ -8,7 +8,7 @@
 
   fs = require('fs');
 
-  USAGE = "Usage: phantomjs loader.js instance_name application_name macha_load_timeout";
+  USAGE = "Usage: phantomjs loader.js instance_name application_name [report_path] [macha_load_timeout]";
 
   Reporter = (function () {
     function Reporter(config, url) {
@@ -310,8 +310,13 @@
   config = {};
 
   var instanceName = system.args[1];
+  console.log('Working instance: ' + instanceName);
+
   var applicationName = system.args[2];
-  config.timeout = system.args[3] || 30000;
+  console.log('Application name: ' + applicationName);
+  
+  config.reporter = system.args[3] || 'report.js';
+  config.timeout = system.args[4] || 30000;
 
   var testResults = { fail: 0, pass: 0, total: 0 };
 
@@ -366,7 +371,6 @@
     config.cookies = loginCookies;
 
     config.verbose = false;
-    config.reporter = 'report.js';
 
     if (config.hooks) {
       config.hooks = require(config.hooks);
