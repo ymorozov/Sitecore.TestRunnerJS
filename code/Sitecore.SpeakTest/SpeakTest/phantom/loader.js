@@ -8,7 +8,7 @@
 
   fs = require('fs');
 
-  USAGE = "Usage: phantomjs mocha-phantomjs.coffee URL REPORTER [CONFIG]";
+  USAGE = "Usage: phantomjs loader.js instance_name application_name macha_load_timeout";
 
   Reporter = (function () {
     function Reporter(config, url) {
@@ -20,7 +20,7 @@
       this.waitForMocha = __bind(this.waitForMocha, this);
       this.url = url;
       this.columns = parseInt(system.env.COLUMNS || 75) * .75 | 0;
-      this.mochaStartWait = this.config.timeout || 20000;
+      this.mochaStartWait = this.config.timeout;
       this.startTime = Date.now();
       this.output = this.config.file ? fs.open(this.config.file, 'w') : system.stdout;
       this.testsComplete = false;
@@ -307,8 +307,12 @@
 
   })();
 
+  config = {};
+
   var instanceName = system.args[1];
   var applicationName = system.args[2];
+  config.timeout = system.args[3] || 30000;
+
   var testResults = { fail: 0, pass: 0, total: 0 };
 
   var settingsPage = webpage.create();
@@ -359,7 +363,6 @@
       phantom.exit(-1);
     }
 
-    config = JSON.parse(system.args[3] || '{}');
     config.cookies = loginCookies;
 
     config.verbose = false;
@@ -401,9 +404,9 @@
 
         callback();
       } else {
-        setTimeout(function() { waitForTestEnd(runner, callback); }, 50);
+        setTimeout(function () { waitForTestEnd(runner, callback); }, 50);
       }
-    } catch(e)  {
+    } catch (e) {
       return phantom.exit(e.code || 1);
     }
   }
