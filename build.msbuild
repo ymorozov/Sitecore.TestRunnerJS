@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="StartBuild" ToolsVersion="4.0">
+  <Import Project="build.config" />
+
+  <Target Name="Clean">
+    <MSBuild Projects="@(ProjectToBuild)" Targets="Clean" Properties="Configuration=Debug" />
+    <MSBuild Projects="@(ProjectToBuild)" Targets="Clean" Properties="Configuration=Release" />
+    <RemoveDir Directories="$(TempFolder)" />
+    <RemoveDir Directories="$(ReleaseFolder)" />
+  </Target>
+
+  <Target Name="RestorePackages">
+    <Exec Command="$(NuGet) restore -PackagesDirectory $(PackagesDirectory)" WorkingDirectory="$(SourceFolder)" />
+  </Target>
+
+  <Target Name="Build" DependsOnTargets="Clean;RestorePackages">
+    <MSBuild Projects="$(ProjectToBuild)" Properties="Configuration=Release" />
+  </Target>
+
+  <Target Name="Output" DependsOnTargets="Build">
+    <MakeDir Directories="$(TempFolder)" />
+    <MakeDir Directories="$(TempFolder)\bin" />
+    <Copy SourceFiles="$(SourceFolder)\Sitecore.SpeakTest\bin\release\Sitecore.SpeakTest.dll" DestinationFolder="$(TempFolder)\bin" />
+    <Copy SourceFiles="$(SourceFolder)\Sitecore.SpeakTest\bin\release\Sitecore.SpeakTest.pdb" DestinationFolder="$(TempFolder)\bin" />
+
+    <MakeDir Directories="$(TempFolder)\App_Config" />
+    <Exec Command="xcopy.exe  $(SourceFolder)\Sitecore.SpeakTest\App_Config $(TempFolder)\App_Config /e" />
+
+    <MakeDir Directories="$(TempFolder)\SpeakTest" />
+    <Exec Command="xcopy.exe  $(SourceFolder)\Sitecore.SpeakTest\SpeakTest $(TempFolder)\SpeakTest /e" />
+
+    <MakeDir Directories="$(ReleaseFolder)" />
+    
+    <RemoveDir Directories="$(TempFolder)" />
+  </Target>
+
+  <Target Name="StartBuild" DependsOnTargets="Output" />
+</Project>
