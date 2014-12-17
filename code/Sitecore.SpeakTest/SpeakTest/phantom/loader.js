@@ -395,7 +395,11 @@
       console.log('Tests execution was finished.');
       console.log('Passed: ' + testResults.pass + ' Failed: ' + testResults.fail + ' Total: ' + testResults.total);
 
-      phantom.exit(testResults.fail > 0 ? -1 : 1);
+      // Turn off testing mode.
+      var launchpadPage = webpage.create();
+      launchpadPage.open("http://" + instanceName + "/sitecore/client/Applications/Launch Pad?sc_speaktest=0", function () {
+        phantom.exit(testResults.fail > 0 ? -1 : 1);
+      });
     }
   }
 
