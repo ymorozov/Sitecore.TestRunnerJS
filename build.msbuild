@@ -10,7 +10,7 @@
   </Target>
 
   <Target Name="RestorePackages">
-    <Exec Command="$(NuGet) restore -PackagesDirectory $(PackagesDirectory)" WorkingDirectory="$(SourceFolder)" />
+    <Exec Command="$(NuGet) restore -PackagesDirectory $(PackagesFolder)" WorkingDirectory="$(SourceFolder)" />
   </Target>
 
   <Target Name="Build" DependsOnTargets="Clean;RestorePackages">
@@ -28,10 +28,11 @@
 
     <MakeDir Directories="$(TempFolder)\SpeakTest" />
     <Exec Command="xcopy.exe  $(SourceFolder)\Sitecore.SpeakTest\SpeakTest $(TempFolder)\SpeakTest /e" />
+    <Copy SourceFiles="$(SourceFolder)\$(PackagesFolder)\PhantomJS.1.9.8\tools\phantomjs\phantomjs.exe" DestinationFolder="$(TempFolder)\SpeakTest\phantom" />
 
     <MakeDir Directories="$(ReleaseFolder)" />
     
-    <RemoveDir Directories="$(TempFolder)" />
+    <!--<RemoveDir Directories="$(TempFolder)" />-->
   </Target>
 
   <Target Name="StartBuild" DependsOnTargets="Output" />
