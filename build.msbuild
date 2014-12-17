@@ -18,7 +18,6 @@
   </Target>
 
   <Target Name="Output" DependsOnTargets="Build">
-    <MakeDir Directories="$(TempFolder)" />
     <MakeDir Directories="$(TempFolder)\bin" />
     <Copy SourceFiles="$(SourceFolder)\Sitecore.SpeakTest\bin\release\Sitecore.SpeakTest.dll" DestinationFolder="$(TempFolder)\bin" />
     <Copy SourceFiles="$(SourceFolder)\Sitecore.SpeakTest\bin\release\Sitecore.SpeakTest.pdb" DestinationFolder="$(TempFolder)\bin" />
@@ -30,9 +29,10 @@
     <Exec Command="xcopy.exe  $(SourceFolder)\Sitecore.SpeakTest\SpeakTest $(TempFolder)\SpeakTest /e" />
     <Copy SourceFiles="$(SourceFolder)\$(PackagesFolder)\PhantomJS.1.9.8\tools\phantomjs\phantomjs.exe" DestinationFolder="$(TempFolder)\SpeakTest\phantom" />
 
-    <MakeDir Directories="$(ReleaseFolder)" />
-    
-    <!--<RemoveDir Directories="$(TempFolder)" />-->
+    <MakeDir Directories="$(ReleaseFolder)\SpeakTest" />
+    <Exec Command="xcopy.exe  $(TempFolder) $(ReleaseFolder)\SpeakTest /e" />
+
+    <RemoveDir Directories="$(TempFolder)" />
   </Target>
 
   <Target Name="StartBuild" DependsOnTargets="Output" />
