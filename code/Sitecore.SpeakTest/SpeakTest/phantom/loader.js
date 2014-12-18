@@ -319,6 +319,7 @@
   config.timeout = system.args[4] || 30000;
 
   var testResults = { fail: 0, pass: 0, total: 0 };
+  var startTime = (new Date()).getTime();
 
   var settingsPage = webpage.create();
   settingsPage.open("http://" + instanceName + "/speaktest/phantom/settings.html?app=" + applicationName, function () {
@@ -393,7 +394,8 @@
       waitForTestEnd(runner, function () { runTestsOnPages(pagesUnderTest); });
     } else {
       console.log('Tests execution was finished.');
-      console.log('Passed: ' + testResults.pass + ' Failed: ' + testResults.fail + ' Total: ' + testResults.total);
+      var time = (new Date()).getTime() - startTime;
+      console.log('Passed: ' + testResults.pass + ' Failed: ' + testResults.fail + ' Total: ' + testResults.total + ' Time: ' + time + 'ms');
 
       // Turn off testing mode.
       var launchpadPage = webpage.create();
