@@ -398,7 +398,7 @@
       // Turn off testing mode.
       var launchpadPage = webpage.create();
       launchpadPage.open("http://" + instanceName + "/sitecore/client/Applications/Launch Pad?sc_speaktest=0", function () {
-        phantom.exit(testResults.fail > 0 ? -1 : 1);
+        phantom.exit(testResults.fail);
       });
     }
   }
