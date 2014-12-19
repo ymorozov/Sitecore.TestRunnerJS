@@ -328,6 +328,7 @@
     testPagesResult = settingsPage.evaluate(function () {
       return testPages;
     });
+    settingsPage.close();
 
     if (testPagesResult) {
       console.log('Test settings was loaded.');
@@ -353,6 +354,7 @@
         console.log('Launch pad page loaded! Url: ' + loginPage.url);
 
         beginTestExecution(loginPage.cookies, pagesUnderTest);
+        loginPage.close();
       };
 
       loginPage.evaluate(function () {
