@@ -316,7 +316,7 @@
   console.log('Application name: ' + applicationName);
   
   config.reporter = system.args[3] || 'report.js';
-  config.timeout = system.args[4] || 30000;
+  config.timeout = parseInt(system.args[4]) || 30000;
 
   var testResults = { fail: 0, pass: 0, total: 0 };
   var startTime = (new Date()).getTime();
