@@ -29,9 +29,10 @@
     <Exec Command="xcopy.exe  $(SourceFolder)\Sitecore.SpeakTest\SpeakTest $(TempFolder)\SpeakTest /e" />
     <Copy SourceFiles="$(SourceFolder)\$(PackagesFolder)\PhantomJS.1.9.8\tools\phantomjs\phantomjs.exe" DestinationFolder="$(TempFolder)\SpeakTest\phantom" />
 
-    <MakeDir Directories="$(ReleaseFolder)\SpeakTest" />
-    <Exec Command="xcopy.exe  $(TempFolder) $(ReleaseFolder)\SpeakTest /e" />
-
+    <!--<MakeDir Directories="$(ReleaseFolder)\SpeakTest" />-->
+    <!--<Exec Command="xcopy.exe  $(TempFolder) $(ReleaseFolder)\SpeakTest /e" />-->
+    <Exec Command="$(SourceFolder)\$(PackagesFolder)\7-Zip.CommandLine.9.20.0\tools\7za.exe a $(ReleaseFolder)\SpeakTest.zip  $(TempFolder)\*" />
+    
     <RemoveDir Directories="$(TempFolder)" />
   </Target>
 
