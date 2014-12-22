@@ -33,7 +33,7 @@
     <!--<Exec Command="xcopy.exe  $(TempFolder) $(ReleaseFolder)\SpeakTest /e" />-->
     <Exec Command="$(SourceFolder)\$(PackagesFolder)\7-Zip.CommandLine.9.20.0\tools\7za.exe a $(ReleaseFolder)\SpeakTest.zip  $(TempFolder)\*" />
     
-    <RemoveDir Directories="$(TempFolder)" />
+    <!--<RemoveDir Directories="$(TempFolder)" />-->
   </Target>
 
   <Target Name="StartBuild" DependsOnTargets="Output" />

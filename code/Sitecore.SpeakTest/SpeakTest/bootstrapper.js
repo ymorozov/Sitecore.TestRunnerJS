@@ -12,7 +12,7 @@
     },
   });
 
-  require.config({ paths: { tests: '/testspeak/testfixture/getbyurl?url=' + window.location } });
+  require.config({ paths: { tests: '/testspeak/testfixture/getbyurl?url=' + encodeURIComponent(window.location) } });
 
   require(['require', 'chai', 'mocha', 'sinon'], function (require, chai) {
     expect = chai.expect;
