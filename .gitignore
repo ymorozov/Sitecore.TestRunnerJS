@@ -160,6 +160,7 @@ output/
 *.bak
 
 # Sitecore files
+assets/*.dll
 code/SpeakTest*/App_Browsers/
 code/SpeakTest*/App_Config/*.config
 code/SpeakTest*/App_Config/Include/*.config
