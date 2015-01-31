@@ -33,11 +33,9 @@
     <Reference Include="Sitecore.Kernel">
       <HintPath>..\..\assets\Sitecore.Kernel.dll</HintPath>
     </Reference>
-    <Reference Include="Sitecore.TestKit.Integration">
-      <HintPath>..\..\assets\Sitecore.TestKit.Integration.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,7 +46,9 @@
     <Compile Include="Pipelines\HttpRequest\EnsureSpeakTestingEnabled.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="SpeakTest\bootstrap.js" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="App_Config\Include\Sitecore.SpeakTest.config" />
   </ItemGroup>
