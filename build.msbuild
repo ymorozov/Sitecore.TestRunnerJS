@@ -27,14 +27,15 @@
 
     <MakeDir Directories="$(TempFolder)\TestRunnerJS" />
     <Exec Command="xcopy.exe  $(SourceFolder)\Sitecore.TestRunnerJS\TestRunnerJS $(TempFolder)\TestRunnerJS /e" />
-    <Copy SourceFiles="$(SourceFolder)\$(PackagesFolder)\PhantomJS.1.9.8\tools\phantomjs\phantomjs.exe" DestinationFolder="$(TempFolder)\TestRunnerJS\phantom" />
 
-    <!--<MakeDir Directories="$(ReleaseFolder)\TestRunnerJS" />-->
-    <!--<Exec Command="xcopy.exe  $(TempFolder) $(ReleaseFolder)\TestRunnerJS /e" />-->
     <Exec Command="$(SourceFolder)\$(PackagesFolder)\7-Zip.CommandLine.9.20.0\tools\7za.exe a $(ReleaseFolder)\TestRunnerJS.zip  $(TempFolder)\*" />
     
-    <!--<RemoveDir Directories="$(TempFolder)" />-->
+    <RemoveDir Directories="$(TempFolder)" />
   </Target>
 
-  <Target Name="StartBuild" DependsOnTargets="Output" />
+  <Target Name="NuGetPackage" DependsOnTargets="Output">
+    <Exec Command="$(NuGet) pack Sitecore.TestRunnerJS/Sitecore.TestRunnerJS.csproj -Properties Configuration=Release -OutputDirectory ..\$(ReleaseFolder) -Build -Symbols" WorkingDirectory="$(SourceFolder)" />
+  </Target>
+
+  <Target Name="StartBuild" DependsOnTargets="NuGetPackage" />
 </Project>

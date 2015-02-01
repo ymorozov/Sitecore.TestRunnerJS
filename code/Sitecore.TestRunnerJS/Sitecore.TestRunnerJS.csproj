@@ -74,7 +74,7 @@
     <Content Include="TestRunnerJS\phantom\settings.html" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App_Config\Include\Sitecore.TestRunnerJS.config" />
+    <Content Include="App_Config\Include\Sitecore.TestRunnerJS.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
