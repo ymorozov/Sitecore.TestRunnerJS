@@ -7,8 +7,8 @@
     <ProjectGuid>{97AAC5D1-3521-411C-8F19-E1B5625F3D9E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sitecore.SpeakTest</RootNamespace>
-    <AssemblyName>Sitecore.SpeakTest</AssemblyName>
+    <RootNamespace>Sitecore.TestRunnerJS</RootNamespace>
+    <AssemblyName>Sitecore.TestRunnerJS</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -55,26 +55,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pipelines\HttpRequest\EnsureSpeakTestingEnabled.cs" />
+    <Compile Include="Pipelines\HttpRequest\EnsureTestRunnerEnabled.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ConfigSettings.cs" />
     <Compile Include="TestFixtureController.cs" />
     <Compile Include="WebApiConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SpeakTest\assets\fakeserver.js" />
-    <Content Include="SpeakTest\assets\loca.js" />
-    <Content Include="SpeakTest\assets\testsnotfound.js" />
-    <Content Include="SpeakTest\assets\chai.js" />
-    <Content Include="SpeakTest\assets\mocha.js" />
-    <Content Include="SpeakTest\assets\sinon.js" />
-    <Content Include="SpeakTest\bootstrapper.js" />
-    <Content Include="SpeakTest\phantom\loader.js" />
-    <Content Include="SpeakTest\phantom\report.js" />
-    <Content Include="SpeakTest\phantom\settings.html" />
+    <Content Include="TestRunnerJS\assets\fakeserver.js" />
+    <Content Include="TestRunnerJS\assets\loca.js" />
+    <Content Include="TestRunnerJS\assets\testsnotfound.js" />
+    <Content Include="TestRunnerJS\assets\chai.js" />
+    <Content Include="TestRunnerJS\assets\mocha.js" />
+    <Content Include="TestRunnerJS\assets\sinon.js" />
+    <Content Include="TestRunnerJS\bootstrapper.js" />
+    <Content Include="TestRunnerJS\phantom\loader.js" />
+    <Content Include="TestRunnerJS\phantom\report.js" />
+    <Content Include="TestRunnerJS\phantom\settings.html" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App_Config\Include\Sitecore.SpeakTest.config" />
+    <None Include="App_Config\Include\Sitecore.TestRunnerJS.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

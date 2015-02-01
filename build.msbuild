@@ -19,19 +19,19 @@
 
   <Target Name="Output" DependsOnTargets="Build">
     <MakeDir Directories="$(TempFolder)\bin" />
-    <Copy SourceFiles="$(SourceFolder)\Sitecore.SpeakTest\bin\release\Sitecore.SpeakTest.dll" DestinationFolder="$(TempFolder)\bin" />
-    <Copy SourceFiles="$(SourceFolder)\Sitecore.SpeakTest\bin\release\Sitecore.SpeakTest.pdb" DestinationFolder="$(TempFolder)\bin" />
+    <Copy SourceFiles="$(SourceFolder)\Sitecore.TestRunnerJS\bin\release\Sitecore.TestRunnerJS.dll" DestinationFolder="$(TempFolder)\bin" />
+    <Copy SourceFiles="$(SourceFolder)\Sitecore.TestRunnerJS\bin\release\Sitecore.TestRunnerJS.pdb" DestinationFolder="$(TempFolder)\bin" />
 
     <MakeDir Directories="$(TempFolder)\App_Config" />
-    <Exec Command="xcopy.exe  $(SourceFolder)\Sitecore.SpeakTest\App_Config $(TempFolder)\App_Config /e" />
+    <Exec Command="xcopy.exe  $(SourceFolder)\Sitecore.TestRunnerJS\App_Config $(TempFolder)\App_Config /e" />
 
-    <MakeDir Directories="$(TempFolder)\SpeakTest" />
-    <Exec Command="xcopy.exe  $(SourceFolder)\Sitecore.SpeakTest\SpeakTest $(TempFolder)\SpeakTest /e" />
-    <Copy SourceFiles="$(SourceFolder)\$(PackagesFolder)\PhantomJS.1.9.8\tools\phantomjs\phantomjs.exe" DestinationFolder="$(TempFolder)\SpeakTest\phantom" />
+    <MakeDir Directories="$(TempFolder)\TestRunnerJS" />
+    <Exec Command="xcopy.exe  $(SourceFolder)\Sitecore.TestRunnerJS\TestRunnerJS $(TempFolder)\TestRunnerJS /e" />
+    <Copy SourceFiles="$(SourceFolder)\$(PackagesFolder)\PhantomJS.1.9.8\tools\phantomjs\phantomjs.exe" DestinationFolder="$(TempFolder)\TestRunnerJS\phantom" />
 
-    <!--<MakeDir Directories="$(ReleaseFolder)\SpeakTest" />-->
-    <!--<Exec Command="xcopy.exe  $(TempFolder) $(ReleaseFolder)\SpeakTest /e" />-->
-    <Exec Command="$(SourceFolder)\$(PackagesFolder)\7-Zip.CommandLine.9.20.0\tools\7za.exe a $(ReleaseFolder)\SpeakTest.zip  $(TempFolder)\*" />
+    <!--<MakeDir Directories="$(ReleaseFolder)\TestRunnerJS" />-->
+    <!--<Exec Command="xcopy.exe  $(TempFolder) $(ReleaseFolder)\TestRunnerJS /e" />-->
+    <Exec Command="$(SourceFolder)\$(PackagesFolder)\7-Zip.CommandLine.9.20.0\tools\7za.exe a $(ReleaseFolder)\TestRunnerJS.zip  $(TempFolder)\*" />
     
     <!--<RemoveDir Directories="$(TempFolder)" />-->
   </Target>
