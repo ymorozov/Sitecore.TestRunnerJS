@@ -34,7 +34,18 @@
   </Target>
 
   <Target Name="NuGetPackage" DependsOnTargets="Output">
-    <Exec Command="$(NuGet) pack Sitecore.TestRunnerJS/Sitecore.TestRunnerJS.csproj -Properties Configuration=Release -OutputDirectory ..\$(ReleaseFolder) -Build -Symbols" WorkingDirectory="$(SourceFolder)" />
+    <GetAssemblyIdentity AssemblyFiles="$(SourceFolder)\Sitecore.TestRunnerJS\bin\release\Sitecore.TestRunnerJS.dll">
+      <Output TaskParameter="Assemblies" ItemName="myAssemblyInfo"/>
+    </GetAssemblyIdentity>
+    <PropertyGroup>
+      <Pattern>(\d+)\.(\d+)\.(\d+)</Pattern>
+      <In>%(myAssemblyInfo.Version)</In>
+      <OutVersion>$([System.Text.RegularExpressions.Regex]::Match($(In), $(Pattern)))</OutVersion>
+    </PropertyGroup>
+
+    <Message Text="Version = $(OutVersion)"/>
+    
+    <Exec Command="$(NuGet) pack Sitecore.TestRunnerJS/Sitecore.TestRunnerJS.nuspec -Version $(OutVersion) -OutputDirectory ..\$(ReleaseFolder)" WorkingDirectory="$(SourceFolder)" />
   </Target>
 
   <Target Name="StartBuild" DependsOnTargets="NuGetPackage" />

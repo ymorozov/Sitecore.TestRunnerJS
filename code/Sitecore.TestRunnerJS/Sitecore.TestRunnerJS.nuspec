@@ -1,15 +1,20 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>$id$</id>
+    <id>Sitecore.TestRunnerJS</id>
     <version>$version$</version>
-    <title>$title$</title>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
+    <title>Sitecore.TestRunnerJS</title>
+    <authors>Yuriy Morozov</authors>
+    <owners>Yuriy Morozov</owners>
     <!--<licenseUrl></licenseUrl>
     <projectUrl></projectUrl>-->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
+    <description>Javascript test runner</description>
     <tags>Javascript integration test runner SPEAK</tags>
   </metadata>
+  <files>
+    <file src="bin\Release\Sitecore.TestRunnerJS.dll" target="tools\bin" />
+    <file src="App_Config\**.*" target="tools\App_Config" />
+    <file src="TestRunnerJS\**.*" target="tools\TestRunnerJS" />
+  </files>
 </package>
