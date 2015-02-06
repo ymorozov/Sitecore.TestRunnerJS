@@ -1,14 +1,16 @@
 ﻿(function () {
   console.log("TestRunnerJS suite was loaded.");
 
-  var baseUrl = '/TestRunnerJS/assets/';
+  var assetsBaseUrl = '/TestRunnerJS/assets/';
+  var libsBaseUrl = '/TestRunnerJS/libs/';
+
   require.config({
     paths: {
-      mocha: baseUrl + 'mocha',
-      chai: baseUrl + 'chai',
-      sinon: baseUrl + 'sinon',
-      fakeServer: baseUrl + 'fakeserver',
-      loca: baseUrl + 'loca'
+      mocha: libsBaseUrl + 'mocha',
+      chai: libsBaseUrl + 'chai',
+      sinon: libsBaseUrl + 'sinon',
+      fakeServer: assetsBaseUrl + 'fakeserver',
+      loca: libsBaseUrl + 'loca'
     },
   });
 
