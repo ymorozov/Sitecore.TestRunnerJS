@@ -63,12 +63,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="TestRunnerJS\assets\fakeserver.js" />
-    <Content Include="TestRunnerJS\assets\loca.js" />
+    <Content Include="TestRunnerJS\libs\loca.js" />
     <Content Include="TestRunnerJS\assets\testsnotfound.js" />
-    <Content Include="TestRunnerJS\assets\chai.js" />
-    <Content Include="TestRunnerJS\assets\mocha.js" />
-    <Content Include="TestRunnerJS\assets\sinon.js" />
-    <Content Include="TestRunnerJS\bootstrapper.js" />
+    <Content Include="TestRunnerJS\libs\chai.js" />
+    <Content Include="TestRunnerJS\libs\mocha.js" />
+    <Content Include="TestRunnerJS\libs\sinon.js" />
+    <Content Include="TestRunnerJS\assets\bootstrapper.js" />
     <Content Include="TestRunnerJS\phantom\loader.js" />
     <Content Include="TestRunnerJS\phantom\report.js" />
     <Content Include="TestRunnerJS\phantom\settings.html" />
