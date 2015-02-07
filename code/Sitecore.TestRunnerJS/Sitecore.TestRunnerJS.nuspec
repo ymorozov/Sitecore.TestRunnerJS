@@ -6,8 +6,8 @@
     <title>Sitecore.TestRunnerJS</title>
     <authors>Yuriy Morozov</authors>
     <owners>Yuriy Morozov</owners>
-    <!--<licenseUrl></licenseUrl>
-    <projectUrl></projectUrl>-->
+    <licenseUrl>https://github.com/ymorozov/Sitecore.TestRunnerJS/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/ymorozov/Sitecore.TestRunnerJS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Javascript test runner</description>
     <tags>Javascript integration test runner SPEAK</tags>
