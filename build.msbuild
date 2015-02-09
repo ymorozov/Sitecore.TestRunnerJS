@@ -25,8 +25,8 @@
     <MakeDir Directories="$(TempFolder)\App_Config" />
     <Exec Command="xcopy.exe  $(SourceFolder)\Sitecore.TestRunnerJS\App_Config $(TempFolder)\App_Config /e" />
 
-    <MakeDir Directories="$(TempFolder)\TestRunnerJS" />
-    <Exec Command="xcopy.exe  $(SourceFolder)\Sitecore.TestRunnerJS\TestRunnerJS $(TempFolder)\TestRunnerJS /e" />
+    <MakeDir Directories="$(TempFolder)\sitecore" />
+    <Exec Command="xcopy.exe  $(SourceFolder)\Sitecore.TestRunnerJS\sitecore $(TempFolder)\sitecore /e" />
 
     <Exec Command="$(SourceFolder)\$(PackagesFolder)\7-Zip.CommandLine.9.20.0\tools\7za.exe a $(ReleaseFolder)\TestRunnerJS.zip  $(TempFolder)\*" />
     

@@ -15,7 +15,7 @@
   <files>
     <file src="bin\Release\Sitecore.TestRunnerJS.dll" target="tools\bin" />
     <file src="App_Config\**.*" target="tools\App_Config" />
-    <file src="TestRunnerJS\**.*" target="tools\TestRunnerJS" />
+    <file src="sitecore\**.*" target="tools\sitecore" />
     <file src="init.ps1" target="tools\init.ps1" />
   </files>
 </package>

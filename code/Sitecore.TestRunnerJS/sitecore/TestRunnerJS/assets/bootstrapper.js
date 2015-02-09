@@ -1,8 +1,9 @@
 ﻿(function () {
   console.log("TestRunnerJS suite was loaded.");
 
-  var assetsBaseUrl = '/TestRunnerJS/assets/';
-  var libsBaseUrl = '/TestRunnerJS/libs/';
+  var baseUrl = '/sitecore/TestRunnerJS/';
+  var assetsBaseUrl = baseUrl + 'assets/';
+  var libsBaseUrl = baseUrl + 'libs/';
 
   require.config({
     paths: {

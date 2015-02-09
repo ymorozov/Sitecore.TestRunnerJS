@@ -322,7 +322,7 @@
   var startTime = (new Date()).getTime();
 
   var settingsPage = webpage.create();
-  settingsPage.open("http://" + instanceName + "/testrunnerjs/phantom/settings.html?app=" + applicationName, function () {
+  settingsPage.open("http://" + instanceName + "/sitecore/testrunnerjs/phantom/settings.html?app=" + applicationName, function () {
     console.log('Loading test settings.');
 
     testPagesResult = settingsPage.evaluate(function () {
