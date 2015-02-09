@@ -27,7 +27,7 @@
         var applicationUrlPart = applicationUrlParts[1];
         var applicationUrlParameterParts = applicationUrlPart.Split('/');
 
-        if (applicationUrlParameterParts.Length >= 2)
+        if (applicationUrlParameterParts.Length >= 1)
         {
           var testFixtureParameter = queryParameters.Get(TestFixtureParameterName);
           if (!string.IsNullOrEmpty(testFixtureParameter))

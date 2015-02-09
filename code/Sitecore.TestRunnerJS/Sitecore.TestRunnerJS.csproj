@@ -62,16 +62,16 @@
     <Compile Include="WebApiConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TestRunnerJS\assets\fakeserver.js" />
-    <Content Include="TestRunnerJS\libs\loca.js" />
-    <Content Include="TestRunnerJS\assets\testsnotfound.js" />
-    <Content Include="TestRunnerJS\libs\chai.js" />
-    <Content Include="TestRunnerJS\libs\mocha.js" />
-    <Content Include="TestRunnerJS\libs\sinon.js" />
-    <Content Include="TestRunnerJS\assets\bootstrapper.js" />
-    <Content Include="TestRunnerJS\phantom\loader.js" />
-    <Content Include="TestRunnerJS\phantom\report.js" />
-    <Content Include="TestRunnerJS\phantom\settings.html" />
+    <Content Include="sitecore\TestRunnerJS\assets\fakeserver.js" />
+    <Content Include="sitecore\TestRunnerJS\libs\loca.js" />
+    <Content Include="sitecore\TestRunnerJS\assets\testsnotfound.js" />
+    <Content Include="sitecore\TestRunnerJS\libs\chai.js" />
+    <Content Include="sitecore\TestRunnerJS\libs\mocha.js" />
+    <Content Include="sitecore\TestRunnerJS\libs\sinon.js" />
+    <Content Include="sitecore\TestRunnerJS\assets\bootstrapper.js" />
+    <Content Include="sitecore\TestRunnerJS\phantom\loader.js" />
+    <Content Include="sitecore\TestRunnerJS\phantom\report.js" />
+    <Content Include="sitecore\TestRunnerJS\phantom\settings.html" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Config\Include\Sitecore.TestRunnerJS.config" />

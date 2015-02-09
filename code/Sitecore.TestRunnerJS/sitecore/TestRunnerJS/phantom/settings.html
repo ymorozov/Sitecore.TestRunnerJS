@@ -22,7 +22,7 @@
     }
 
     var appName = getQueryParameter("app");
-    loadjs("/sitecore/TestRunnerJS/tests/" + appName + ".js");
+    loadjs("/TestRunnerJS/testfixture/getbyurl?url=http://" + location.host + "/sitecore/shell/sitecore/client/Applications/" + appName);
   </script>
 </head>
 <body>
