@@ -47,7 +47,7 @@
         }
       }
 
-      var notFoundPath = HostingEnvironment.MapPath("~/TestRunnerJS/assets/testsnotfound.js");
+      var notFoundPath = HostingEnvironment.MapPath("~/sitecore/TestRunnerJS/assets/testsnotfound.js");
       return this.GetResponseMessage(notFoundPath);
     }
 
