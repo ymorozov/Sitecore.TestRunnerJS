@@ -1,4 +1,7 @@
-﻿0.6.2
+﻿0.6.3
+* [FIX] Restore TestRunner files in projects on Package Manage Console init
+
+0.6.2
 * [FIX] Install TestRunner nuget package as project level package
 
 0.6.1

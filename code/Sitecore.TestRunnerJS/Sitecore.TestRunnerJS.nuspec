@@ -18,5 +18,6 @@
     <file src="sitecore\**.*" target="tools\sitecore" />
     <file src="README.TXT" target="content\README.TXT" />
     <file src="Install.ps1" target="tools\Install.ps1" />
+    <file src="Init.ps1" target="tools\Init.ps1" />
   </files>
 </package>
