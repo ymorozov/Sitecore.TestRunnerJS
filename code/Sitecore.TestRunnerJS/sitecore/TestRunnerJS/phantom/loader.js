@@ -401,7 +401,7 @@
 
       // Turn off testing mode.
       var launchpadPage = webpage.create();
-      launchpadPage.open("http://" + instanceName + "/sitecore/client/Applications/Launch Pad?sc_testrunnerjs=0", function () {
+      launchpadPage.open("http://" + instanceName + "/sitecore/client/Applications/Launchpad?sc_testrunnerjs=0", function () {
         phantom.exit(testResults.fail);
       });
     }
