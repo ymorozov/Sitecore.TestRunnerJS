@@ -13,9 +13,9 @@ Sample SPEAK application with JS integration tests
 
 ## How to run in browser
 1. Open following URLs:
-"/sitecore/shell/sitecore/client/Applications/SampleApp/FirstPage?sc_testrunnerjs=1",
-"/sitecore/shell/sitecore/client/Applications/SampleApp/FirstPage/Pages/SecondPage?sc_testfixture=additionaltests&sc_testrunnerjs=1",
-"/sitecore/shell/sitecore/client/Applications/SampleApp/FirstPage/Pages/SecondPage?sc_testrunnerjs=1"
+* /sitecore/shell/sitecore/client/Applications/SampleApp/FirstPage?sc_testrunnerjs=1
+* /sitecore/shell/sitecore/client/Applications/SampleApp/FirstPage/Pages/SecondPage?sc_testfixture=additionaltests&sc_testrunnerjs=1
+* /sitecore/shell/sitecore/client/Applications/SampleApp/FirstPage/Pages/SecondPage?sc_testrunnerjs=1
 2. Ensure you have opened browser console and check tests output there
 
 ## How to run using powershell script
