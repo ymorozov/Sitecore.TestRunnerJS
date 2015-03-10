@@ -1,0 +1,93 @@
+----item----
+version: 1
+id: {41E48D99-4001-4D9E-B814-8F0850844ECA}
+database: core
+path: /sitecore/client/Applications/SampleApp/FirstPage
+parent: {8A8CF8AC-CD63-4522-BAEE-9024FB2BFFC7}
+name: FirstPage
+master: {00000000-0000-0000-0000-000000000000}
+template: {D7CF8B7E-083D-4351-AEF2-2BCD2D794826}
+templatekey: Speak-ListPage
+
+----field----
+field: {3A67AD0F-9530-4B1B-9B70-9230C36AE8D6}
+name: UseFullWidth
+key: usefullwidth
+content-length: 1
+
+1
+----field----
+field: {BA3F86A2-4A1C-4D78-B63D-91C2779C1B5E}
+name: __Sortorder
+key: __sortorder
+content-length: 3
+
+200
+----field----
+field: {F1A1FE9E-A60C-4DDB-A3A0-BB5B29FE732E}
+name: __Renderings
+key: __renderings
+content-length: 3071
+
+<r>
+  <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{4F72A793-BDBC-4262-9523-6AADD8FEA487}">
+    <r id="{DAFAFFB8-74AF-4141-A96A-70B16834CEC6}" par="PageCodeScriptFileName=%2fsitecore%2fshell%2fclient%2fApplications%2fSampleApp%2ffirst.js" ph="Page.Code" uid="{AFB79017-AFFF-40C4-ACD9-9BC4210BF774}" />
+    <r id="{5AE97C0C-EE88-4564-A363-4FA11C01C90A}" ph="GlobalHeader" uid="{DCDFAC62-FA57-4768-A67E-932C2D80691F}" />
+    <r id="{7A69C522-7E99-4630-A25A-5D571505862A}" par="Id=GlobalLogo1" ph="GlobalHeader.StartButton" uid="{0E6CC47B-D130-4B1E-9745-A1D2224B65CB}" />
+    <r id="{2EE499CD-439A-4F10-B81F-36A54CAC01DB}" par="Id=AccountInformation1" ph="GlobalHeader.LoginInfo" uid="{44B3E2F0-FFFD-4501-B7AB-0D993106A0C1}" />
+    <r id="{EC86834B-890C-405C-BB36-CA25044909E1}" ph="GlobalFooter" uid="{427ED994-6C61-493C-BE34-A678E81F66E4}" />
+    <r id="{225B55AC-0270-44F9-842B-96D89F9C20A9}" ph="Page.Body" uid="{9A9B01AB-6D73-4E4B-929E-29F04EAE4388}" />
+    <r id="{93CEEFCD-2DE1-40AF-AE9A-EBBFBCCC522F}" ph="ApplicationHeader" uid="{CD19EEC0-8DDF-437D-AE1F-27518BF3E042}" />
+    <r id="{EB6214BE-5687-4706-ABA6-B25C0958C85B}" ph="ApplicationContent" uid="{2637FB41-08B3-492B-B128-451C509CA2A9}" />
+    <r id="{C5D667DE-AA48-4072-872E-7C8BFFCE4D44}" par="IsRootHidden=0&amp;Id=Menu1&amp;ItemsDataSource=%7b41E48D99-4001-4D9E-B814-8F0850844ECA%7d" ph="ApplicationContent.Navigation" uid="{9B9F9897-3895-405B-8B50-BEAAEAEA2BF5}" />
+    <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=Main" ph="ApplicationContent.Main" uid="{029CD802-46B4-4A0A-84D2-6B149289C9D4}" />
+    <r id="{442BD093-FBAD-4E36-BC08-489E16C82D08}" par="Id=AdvancedExpander1&amp;Header=Another+page+content" ph="Main.Content" uid="{87ED9880-ED56-47C8-B1AE-D7242BE3877E}" />
+    <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="UsePadding=1&amp;Id=RowPanel1&amp;PaddingType=All" ph="AdvancedExpander1.Body" uid="{6FA00A3B-F19C-44A9-B73D-A1989142B22A}" />
+    <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=ColumnPanel1&amp;GridColumns=5&amp;ContentAlign=Center" ph="RowPanel1.Content" uid="{5F4D8156-1EB6-432E-BF65-D49A87E86EBC}" />
+    <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="IsEnabled=1&amp;Id=ActionTextBox&amp;IsVisible=1" ph="ColumnPanel1.Content" uid="{3A5C8822-2396-41DE-B255-B30D4FFD03C8}" />
+    <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=ColumnPanel2&amp;GridColumns=2&amp;ContentAlign=Center" ph="RowPanel1.Content" uid="{1A0C25A7-0C8C-4822-BEFA-FA0677B0CFE8}" />
+    <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Id=ActionButton&amp;Text=Do+Action" ph="ColumnPanel2.Content" uid="{940878CA-7C61-4DF9-8A4A-6FA00EB3314A}" />
+    <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=ColumnPanel3&amp;GridColumns=5&amp;ContentAlign=Center" ph="RowPanel1.Content" uid="{01CEE656-29E5-4D3E-9992-05E5F02F2D02}" />
+    <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="IsEnabled=1&amp;IsReadonly=1&amp;Id=ResultTextBox&amp;IsVisible=1" ph="ColumnPanel3.Content" uid="{090412E8-3D14-4F8C-8F9A-CFC72DB76210}" />
+  </d>
+</r>
+----version----
+language: en
+version: 1
+revision: d02c3ef6-fc08-475a-a345-1e33577d6438
+
+----field----
+field: {7205A57F-93B4-413A-AA9A-6B16BBC59565}
+name: BrowserTitle
+key: browsertitle
+content-length: 5
+
+First
+----field----
+field: {25BED78C-4957-4165-998A-CA1B52F67497}
+name: __Created
+key: __created
+content-length: 16
+
+20150305T195012Z
+----field----
+field: {8CDC337E-A112-42FB-BBB4-4143751E123F}
+name: __Revision
+key: __revision
+content-length: 36
+
+d02c3ef6-fc08-475a-a345-1e33577d6438
+----field----
+field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
+name: __Updated
+key: __updated
+content-length: 35
+
+20150306T204310:635612713903412247Z
+----field----
+field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
+name: __Updated by
+key: __updated by
+content-length: 14
+
+sitecore\admin

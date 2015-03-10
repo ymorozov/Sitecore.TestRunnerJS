@@ -1,0 +1,44 @@
+----item----
+version: 1
+id: {CBBEDD9A-8C30-4A42-977B-C2CFA4A39ABB}
+database: core
+path: /sitecore/client/Applications/SampleApp/FirstPage/Pages/SecondPage/PageSettings/ListControl
+parent: {F3B99A05-E8E0-485F-B156-CC5B605B38C6}
+name: ListControl
+master: {00000000-0000-0000-0000-000000000000}
+template: {871931B2-7ECE-4B24-B7D4-3474EB7EAA13}
+templatekey: ListControl
+
+----version----
+language: en
+version: 1
+revision: 731024e8-0eb0-4021-bde3-beb2b4f605b1
+
+----field----
+field: {25BED78C-4957-4165-998A-CA1B52F67497}
+name: __Created
+key: __created
+content-length: 16
+
+20150302T202731Z
+----field----
+field: {8CDC337E-A112-42FB-BBB4-4143751E123F}
+name: __Revision
+key: __revision
+content-length: 36
+
+731024e8-0eb0-4021-bde3-beb2b4f605b1
+----field----
+field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
+name: __Updated
+key: __updated
+content-length: 35
+
+20150302T202731:635609248510740487Z
+----field----
+field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
+name: __Updated by
+key: __updated by
+content-length: 14
+
+sitecore\admin

@@ -1,0 +1,91 @@
+----item----
+version: 1
+id: {FA452E01-3BF3-473A-B5AE-E804EA23FCDC}
+database: core
+path: /sitecore/client/Applications/SampleApp/FirstPage/Pages/SecondPage
+parent: {90B2FB71-A593-42D7-8932-EA26B6EFC121}
+name: SecondPage
+master: {00000000-0000-0000-0000-000000000000}
+template: {B11AFCCD-C286-4384-B694-4465D6C605DE}
+templatekey: Speak-DashboardPage
+
+----field----
+field: {5E642935-A6FC-48E9-B039-FE1136CED488}
+name: Theme
+key: theme
+content-length: 7
+
+Harvard
+----field----
+field: {3A67AD0F-9530-4B1B-9B70-9230C36AE8D6}
+name: UseFullWidth
+key: usefullwidth
+content-length: 1
+
+1
+----field----
+field: {F1A1FE9E-A60C-4DDB-A3A0-BB5B29FE732E}
+name: __Renderings
+key: __renderings
+content-length: 2836
+
+<r>
+  <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{4F72A793-BDBC-4262-9523-6AADD8FEA487}">
+    <r id="{DAFAFFB8-74AF-4141-A96A-70B16834CEC6}" par="PageCodeScriptFileName=%2fsitecore%2fshell%2fclient%2fApplications%2fSampleApp%2fsecond.js" ph="Page.Code" uid="{445D1578-F167-4DA0-9542-ADD19E47EC70}" />
+    <r id="{225B55AC-0270-44F9-842B-96D89F9C20A9}" ph="Page.Body" uid="{FCA64546-10B5-4720-B500-88F24F14A4B4}" />
+    <r id="{73A06518-3FE7-410D-8876-33CA70DAD0B6}" par="Id=MyListDataSource&amp;Url=%2ftest%2fSampleResponse%2fGetItems" ph="Page.Body" uid="{B910472E-A201-4A99-841B-17DE67BF2B74}" />
+    <r id="{5AE97C0C-EE88-4564-A363-4FA11C01C90A}" ph="GlobalHeader" uid="{85108FD8-218F-4B51-8BE3-0554297B28D1}" />
+    <r id="{2EE499CD-439A-4F10-B81F-36A54CAC01DB}" par="Id=AccountInformation1" ph="GlobalHeader.LoginInfo" uid="{54EA652A-6144-4FD3-A175-AB653B08684D}" />
+    <r id="{7A69C522-7E99-4630-A25A-5D571505862A}" par="Id=GlobalLogo1" ph="GlobalHeader.StartButton" uid="{F4AFAE4E-02E1-4279-AF09-899E165C2F1E}" />
+    <r id="{93CEEFCD-2DE1-40AF-AE9A-EBBFBCCC522F}" ph="ApplicationHeader" uid="{68D1FFD0-1DD1-4C22-B986-D256C391083D}" />
+    <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=HeaderTitle&amp;Text=Sample+App" ph="ApplicationHeader.Title" uid="{06FCBB1A-4455-4284-991D-62A4BAE866B2}" />
+    <r id="{EC86834B-890C-405C-BB36-CA25044909E1}" ph="GlobalFooter" uid="{BB3BA737-10F1-46A6-8BBF-332842C10382}" />
+    <r id="{EB6214BE-5687-4706-ABA6-B25C0958C85B}" ph="ApplicationContent" uid="{A3458938-3B6F-4A4A-8EEE-31846A8ECD82}" />
+    <r id="{C5D667DE-AA48-4072-872E-7C8BFFCE4D44}" par="IsRootHidden=0&amp;Id=Menu1&amp;ItemsDataSource=%7b41E48D99-4001-4D9E-B814-8F0850844ECA%7d" ph="ApplicationContent.Navigation" uid="{9C5B29C5-13D5-4FD0-9B9C-BDC5CA360496}" />
+    <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=Main" ph="ApplicationContent.Main" uid="{4C1A31BB-7807-4FBE-93FC-219D04EC430D}" />
+    <r id="{442BD093-FBAD-4E36-BC08-489E16C82D08}" par="Id=MyListAccordion&amp;Header=My+list+accordion" ph="Main.Content" uid="{9885453C-BCCA-4576-8897-9DF467A0B534}" />
+    <r ds="{CBBEDD9A-8C30-4A42-977B-C2CFA4A39ABB}" id="{ACE0AFD6-3DE0-42CF-8E62-4E68CD810A8D}" par="Id=MyListControl&amp;Items=%7bBinding+MyListDataSource.Items%7d&amp;TileHtmlFileName=%2fsitecore%2fshell%2fclient%2fBusiness+Component+Library%2fLayouts%2fRenderings%2fListsAndGrids%2fListControls%2fDefaultTile.cshtml" ph="MyListAccordion.Body" uid="{F901D5D8-B8F5-44E3-931D-F63E45F1739D}" />
+    <r id="{98316BB6-F3F5-4E6F-81F0-79F173D151D8}" par="Id=ReplyLabel&amp;Text=Reply+from+the+server%3a+" ph="Main.Content" uid="{AD492F21-8EAA-45AC-9C58-D524A4C063A6}" />
+    <r id="{98316BB6-F3F5-4E6F-81F0-79F173D151D8}" par="Id=ValueLabel" ph="Main.Content" uid="{E90260C9-FDE1-4128-A538-A55034F65FB3}" />
+  </d>
+</r>
+----version----
+language: en
+version: 1
+revision: 7b57634b-01d5-42d9-a88e-3ef2295e0773
+
+----field----
+field: {7205A57F-93B4-413A-AA9A-6B16BBC59565}
+name: BrowserTitle
+key: browsertitle
+content-length: 6
+
+Second
+----field----
+field: {25BED78C-4957-4165-998A-CA1B52F67497}
+name: __Created
+key: __created
+content-length: 16
+
+20150226T210443Z
+----field----
+field: {8CDC337E-A112-42FB-BBB4-4143751E123F}
+name: __Revision
+key: __revision
+content-length: 36
+
+7b57634b-01d5-42d9-a88e-3ef2295e0773
+----field----
+field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
+name: __Updated
+key: __updated
+content-length: 35
+
+20150310T214731:635616208519899054Z
+----field----
+field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
+name: __Updated by
+key: __updated by
+content-length: 14
+
+sitecore\admin
