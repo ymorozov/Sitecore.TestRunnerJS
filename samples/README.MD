@@ -19,6 +19,8 @@ Sample SPEAK application with JS integration tests
 2. Ensure you have opened browser console and check tests output there
 
 ## How to run using powershell script
-1. Proceed into your site Website folder
-2. Execute "run.ps1" powershell script
-3. Enter your instance name and application name that is "SampleApp"
+1. Open Package Manager Console in Visual Studio
+2. Run in console `Execute-TestRunner <instance_name> <app_name>`
+Where:
+<instance_name> - Your website instance name
+<app_name> - Speak application name (SampleApp)
