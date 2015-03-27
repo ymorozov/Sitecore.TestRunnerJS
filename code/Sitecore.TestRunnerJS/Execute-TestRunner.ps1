@@ -6,14 +6,15 @@ param(
   [string]$applicationName
 )
 
-$solution = $dte.Solution.FileName
-$solutionPath = Split-Path $solution
-$packages = Join-Path ($solutionPath) packages
+$packages = Split-Path (Split-Path $PSScriptRoot)
 
 $phantomPackage = Get-ChildItem $packages\PhantomJS*
-$phantomPath = Join-Path ($phantomPackage) tools\phantomjs\phantomjs.exe
+if($phantomPackage -is [system.array])
+{
+  $phantomPackage = $phantomPackage[$phantomPackage.Length-1]
+}
 
-$runnerPackage = Get-ChildItem $packages\Sitecore.TestRunnerJS*
-$runnerScript = Join-Path ($runnerPackage) tools\sitecore\TestRunnerJS\phantom\run.ps1
+$phantomPath = Join-Path ($phantomPackage) tools\phantomjs\phantomjs.exe
+$runnerScript = Join-Path ($PSScriptRoot) sitecore\TestRunnerJS\phantom\run.ps1
 
 &$runnerScript -instanceName $instanceName -applicationName $applicationName -phantomPath $phantomPath
