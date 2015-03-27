@@ -11,6 +11,9 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Javascript test runner</description>
     <tags>Javascript integration test runner SPEAK</tags>
+    <dependencies>
+      <dependency id="PhantomJS" version="[1.9.8]" />
+    </dependencies>
   </metadata>
   <files>
     <file src="bin\Release\Sitecore.TestRunnerJS.dll" target="tools\bin" />
