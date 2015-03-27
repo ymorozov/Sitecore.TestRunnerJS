@@ -1,4 +1,7 @@
-﻿0.6.3
+﻿0.7.0
+* [NEW] #6: Run all tests from VS in Package Manager Console
+
+0.6.3
 * [FIX] Restore TestRunner files in projects on Package Manage Console init
 
 0.6.2
