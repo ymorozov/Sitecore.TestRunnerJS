@@ -1,4 +1,7 @@
-﻿0.7.0
+﻿0.7.1
+* [FIX] #9: Fix issue with not working assertions in asynchronous tests 
+
+0.7.0
 * [NEW] #6: Run all tests from VS in Package Manager Console
 
 0.6.3

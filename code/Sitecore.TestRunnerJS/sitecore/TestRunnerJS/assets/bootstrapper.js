@@ -18,7 +18,19 @@
   require.config({ paths: { tests: '/TestRunnerJS/testfixture/getbyurl?url=' + encodeURIComponent(window.location) } });
 
   require(['require', 'chai', 'mocha', 'sinon'], function (require, chai) {
-    expect = chai.expect;
+    window.expect = chai.expect;
+
+    mocha.check = function (f, done) {
+      return function () {
+        try {
+          f();
+          done();
+        } catch (e) {
+          done(e);
+        }
+      }
+    };
+
     mocha.setup('bdd');
 
     var taskId = 0,

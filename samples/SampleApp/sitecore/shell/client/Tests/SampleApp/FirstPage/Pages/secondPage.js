@@ -59,12 +59,11 @@ define(['fakeServer', 'sitecore'], function (server, _sc) {
 
       // assert
       // Asynchronously check text value on ValueLabel text change 
-      _sc.app.ValueLabel.on("change:text", function () {
+      // Use mocha.check and pass assertion anonymous function and done callback
+      _sc.app.ValueLabel.on("change:text", mocha.check(function () {
         var text = _sc.app.ValueLabel.get("text");
         expect(text).to.equal(expectedResponse);
-        // Tell mocha that async test is finished
-        done();
-      });
+      }), done);
     });
   });
 
