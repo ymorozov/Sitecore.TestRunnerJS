@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{BBECD4
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.TestRunnerJS.Tests", "Sitecore.TestRunnerJS.Tests\Sitecore.TestRunnerJS.Tests.csproj", "{D021D5E8-47D6-4B56-A3F2-2F56D4986432}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{97AAC5D1-3521-411C-8F19-E1B5625F3D9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97AAC5D1-3521-411C-8F19-E1B5625F3D9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97AAC5D1-3521-411C-8F19-E1B5625F3D9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D021D5E8-47D6-4B56-A3F2-2F56D4986432}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D021D5E8-47D6-4B56-A3F2-2F56D4986432}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D021D5E8-47D6-4B56-A3F2-2F56D4986432}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D021D5E8-47D6-4B56-A3F2-2F56D4986432}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

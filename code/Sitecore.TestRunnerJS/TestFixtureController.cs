@@ -1,15 +1,15 @@
 ﻿namespace Sitecore.TestRunnerJS
 {
-    using System;
-    using System.IO;
-    using System.Net;
-    using System.Net.Http;
-    using System.Net.Http.Headers;
-    using System.Web;
-    using System.Web.Hosting;
-    using System.Web.Http;
+  using System;
+  using System.IO;
+  using System.Net;
+  using System.Net.Http;
+  using System.Net.Http.Headers;
+  using System.Web;
+  using System.Web.Hosting;
+  using System.Web.Http;
 
-    public class TestFixtureController : ApiController
+  public class TestFixtureController : ApiController
   {
     private const string TestFixtureParameterName = "sc_testfixture";
 
