@@ -12,7 +12,7 @@
     <description>Javascript test runner</description>
     <tags>Javascript integration test runner SPEAK</tags>
     <dependencies>
-      <dependency id="PhantomJS" version="[1.9.8]" />
+      <dependency id="PhantomJS" version="[1.9.1,1.9.8]" />
     </dependencies>
   </metadata>
   <files>
