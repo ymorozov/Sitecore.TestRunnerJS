@@ -1,4 +1,7 @@
-﻿0.7.1
+﻿0.7.2
+* [FIX] Support PhantomJS from 1.9.1 to 1.9.8 
+
+0.7.1
 * [FIX] #9: Fix issue with not working assertions in asynchronous tests 
 
 0.7.0
