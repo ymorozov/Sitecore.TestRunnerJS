@@ -48,11 +48,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileService.cs" />
     <Compile Include="Pipelines\HttpRequest\EnsureTestRunnerEnabled.cs" />
     <Compile Include="Pipelines\Initialize\RegisterTestRunnerRoutes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ConfigSettings.cs" />
     <Compile Include="TestFixtureController.cs" />
+    <Compile Include="TestFixtureModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="sitecore\TestRunnerJS\assets\fakeserver.js" />

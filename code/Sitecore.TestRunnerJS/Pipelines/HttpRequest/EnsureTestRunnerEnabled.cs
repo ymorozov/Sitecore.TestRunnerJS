@@ -9,14 +9,21 @@
 
   public class EnsureTestRunnerEnabled : HttpRequestProcessor
   {
+    private readonly ConfigSettings settings;
+
     private const string EnableTestRunnerParameter = "sc_testrunnerjs";
 
     private object previousValue;
 
+    public EnsureTestRunnerEnabled(ConfigSettings settings)
+    {
+      this.settings = settings;
+    }
+
     public override void Process(HttpRequestArgs args)
     {
-      var settingName = ConfigSettings.Instance.RequireJSSettingName;
-      var bootstrapPath = ConfigSettings.Instance.BootstrapModulePath;
+      var settingName = this.settings.RequireJSSettingName;
+      var bootstrapPath = this.settings.BootstrapModulePath;
 
       if (WebUtil.GetQueryString(EnableTestRunnerParameter) != "1")
       {

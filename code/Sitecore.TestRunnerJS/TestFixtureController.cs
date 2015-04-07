@@ -6,15 +6,29 @@
   using System.Net.Http;
   using System.Net.Http.Headers;
   using System.Web;
-  using System.Web.Hosting;
   using System.Web.Http;
 
   public class TestFixtureController : ApiController
   {
     private const string TestFixtureParameterName = "sc_testfixture";
 
+    private readonly FileService fileService;
+
+    private readonly ConfigSettings settings;
+
+    public TestFixtureController()
+      : this(new FileService(), new ConfigSettings())
+    {
+    }
+
+    public TestFixtureController(FileService fileService, ConfigSettings settings)
+    {
+      this.fileService = fileService;
+      this.settings = settings;
+    }
+
     [HttpGet]
-    public HttpResponseMessage GetByUrl(string url)
+    public TestFixtureModel GetByUrl(string url)
     {
       var uri = new Uri(url);
       var queryParameters = HttpUtility.ParseQueryString(uri.Query);
@@ -37,18 +51,17 @@
 
           var pageRelativePath = string.Join(@"/", applicationUrlParameterParts);
 
-          var testFixturePath = HostingEnvironment.MapPath(
-            "~/" + ConfigSettings.Instance.RootTestFixturesFolder + "/" + pageRelativePath + ".js");
+          var testFixturePath = this.fileService.MapPath(
+            "~/" + this.settings.RootTestFixturesFolder + "/" + pageRelativePath + ".js");
 
-          if (File.Exists(testFixturePath))
-          {
-            return this.GetResponseMessage(testFixturePath);
-          }
+          var testFixtureRelativePath = this.fileService.GetRelativePath(testFixturePath);
+
+          return new TestFixtureModel { ExpectedPath = testFixtureRelativePath, IsExist = this.fileService.FileExists(testFixturePath) };
         }
       }
 
-      var notFoundPath = HostingEnvironment.MapPath("~/sitecore/TestRunnerJS/assets/testsnotfound.js");
-      return this.GetResponseMessage(notFoundPath);
+      var notFoundPath = this.fileService.MapPath("~/sitecore/TestRunnerJS/assets/testsnotfound.js");
+      return new TestFixtureModel();
     }
 
     private HttpResponseMessage GetResponseMessage(string testFixturePath)
