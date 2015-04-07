@@ -11,15 +11,18 @@
   {
     private const string EnableTestRunnerParameter = "sc_testrunnerjs";
 
-    private object _previousValue;
+    private object previousValue;
 
     public override void Process(HttpRequestArgs args)
     {
+      var settingName = ConfigSettings.Instance.RequireJSSettingName;
+      var bootstrapPath = ConfigSettings.Instance.BootstrapModulePath;
+
       if (WebUtil.GetQueryString(EnableTestRunnerParameter) != "1")
       {
-        if (WebUtil.GetQueryString(EnableTestRunnerParameter) == "0" && _previousValue != null)
+        if (WebUtil.GetQueryString(EnableTestRunnerParameter) == "0" && this.previousValue != null)
         {
-          this.GetSettings()[ConfigSettings.RequireJSSettingName] = _previousValue;
+          this.GetSettings()[settingName] = this.previousValue;
           Context.Diagnostics.Debugging = false;
         }
 
@@ -27,14 +30,14 @@
       }
 
       Context.Diagnostics.Debugging = true;
-      if (Settings.GetSetting(ConfigSettings.RequireJSSettingName) == ConfigSettings.BootstrapModulePath)
+      if (Settings.GetSetting(settingName) == bootstrapPath)
       {
         return;
       }
 
       var settings = this.GetSettings();
-      _previousValue = settings[ConfigSettings.RequireJSSettingName];
-      settings[ConfigSettings.RequireJSSettingName] = ConfigSettings.BootstrapModulePath;
+      this.previousValue = settings[settingName];
+      settings[settingName] = bootstrapPath;
     }
 
     private Hashtable GetSettings()

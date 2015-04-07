@@ -38,7 +38,7 @@
           var pageRelativePath = string.Join(@"/", applicationUrlParameterParts);
 
           var testFixturePath = HostingEnvironment.MapPath(
-            "~/" + ConfigSettings.RootTestFixturesFolder + "/" + pageRelativePath + ".js");
+            "~/" + ConfigSettings.Instance.RootTestFixturesFolder + "/" + pageRelativePath + ".js");
 
           if (File.Exists(testFixturePath))
           {
