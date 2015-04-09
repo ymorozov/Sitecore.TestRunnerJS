@@ -114,6 +114,8 @@
         if (testFixtureExist) {
           require(['tests', 'jquery'], function (tests, $) {
             if (!tests) {
+              console.warn("Tests haven't been run.");
+              console.info('In order to enable testing test fixture have to return "true" boolean value');
               return;
             }
 
