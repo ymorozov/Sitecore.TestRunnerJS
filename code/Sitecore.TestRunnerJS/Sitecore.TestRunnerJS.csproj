@@ -59,7 +59,6 @@
   <ItemGroup>
     <Content Include="sitecore\TestRunnerJS\assets\fakeserver.js" />
     <Content Include="sitecore\TestRunnerJS\libs\loca.js" />
-    <Content Include="sitecore\TestRunnerJS\assets\testsnotfound.js" />
     <Content Include="sitecore\TestRunnerJS\libs\chai.js" />
     <Content Include="sitecore\TestRunnerJS\libs\mocha.js" />
     <Content Include="sitecore\TestRunnerJS\libs\sinon.js" />
