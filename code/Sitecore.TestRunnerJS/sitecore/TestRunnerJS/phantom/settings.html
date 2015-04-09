@@ -7,13 +7,6 @@
   <script type="text/javascript">
     var testPages = null;
     
-    function loadjs(a) {
-      var b = document.createElement("script");
-      b.setAttribute("type", "text/javascript");
-      b.setAttribute("src", a);
-      document.getElementsByTagName("head")[0].appendChild(b);
-    }
-
     function getQueryParameter(name) {
       name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
       var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -21,8 +14,39 @@
       return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
 
+    function sendRequest(url, success, failure) {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status == 200) {
+            var response = JSON.parse(xhr.responseText);
+            success(response);
+          } else {
+            failure();
+          }
+        }
+      }
+
+      xhr.open('GET', url, true);
+      xhr.setRequestHeader('Content-type', 'application/json');
+      xhr.send();
+    }
+
     var appName = getQueryParameter("app");
-    loadjs("/TestRunnerJS/testfixture/getbyurl?url=http://" + location.host + "/sitecore/client/Applications/" + appName);
+
+    sendRequest('/TestRunnerJS/testfixture/getsettings?application=' + appName, function(res) {
+      if (res.IsExist) {
+        sendRequest(res.ExpectedPath, function(res2) {
+          testPages = res2;
+        }, function() {
+          console.error("Test settings were not loaded.");
+        });
+      } else {
+        console.error("Test settings were not loaded. Expected path: " + res.ExpectedPath);
+      }
+    }, function() {
+      console.error("Test settings were not loaded.");
+    });
   </script>
 </head>
 <body>
