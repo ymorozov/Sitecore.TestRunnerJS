@@ -6,6 +6,7 @@
   var libsBaseUrl = baseUrl + 'libs/';
 
   var testFixtureExist = false;
+  var fakeRequests = [];
 
   require.config({
     paths: {
@@ -39,6 +40,20 @@
   xhr.setRequestHeader('Content-type', 'application/json');
   xhr.send();
 
+  function requestLogger(request) {
+    fakeRequests.push(request);
+  }
+
+  function requestOutput() {
+    if (fakeRequests.length !== 0) {
+      console.groupCollapsed('Fake requests (' + fakeRequests.length + ')');
+      fakeRequests.forEach(function(item) {
+        console.log(item);
+      });
+      console.groupEnd();
+    }
+  }
+
   function loadEnvironment() {
     require(['require', 'chai', 'mocha', 'sinon'], function (require, chai) {
       window.expect = chai.expect;
@@ -55,6 +70,8 @@
       };
 
       mocha.setup('bdd');
+
+      sinon.log = requestLogger;
 
       var taskId = 0,
         runnerCheckerIsStarted = false,
@@ -130,7 +147,8 @@
               } else {
                 require(['loca'], function () {
                   mocha.reporter(mocha.WebKit);
-                  mocha.run();
+                  var runner = mocha.run();
+                  runner.on('end', requestOutput);
                 });
               }
             };
