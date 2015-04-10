@@ -6,6 +6,7 @@
   <title>Settings</title>
   <script type="text/javascript">
     var testPages = null;
+    var testPagesLocation = null;
     
     function getQueryParameter(name) {
       name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -34,7 +35,8 @@
 
     var appName = getQueryParameter("app");
 
-    sendRequest('/TestRunnerJS/testfixture/getsettings?application=' + appName, function(res) {
+    sendRequest('/TestRunnerJS/testfixture/getsettings?application=' + appName, function (res) {
+      testPagesLocation = res;
       if (res.IsExist) {
         sendRequest(res.ExpectedPath, function(res2) {
           testPages = res2;

@@ -325,7 +325,7 @@
   settingsPage.open("http://" + instanceName + "/sitecore/testrunnerjs/phantom/settings.html?app=" + applicationName, function () {
     console.log('Loading test settings.');
 
-    testPagesResult = settingsPage.evaluate(function () {
+    var testPagesResult = settingsPage.evaluate(function () {
       return testPages;
     });
     settingsPage.close();
@@ -339,7 +339,15 @@
       }
       loginIntoSitecore(pagesUnderTest);
     } else {
-      console.log('Error loading test settings. Test execution terminated!');
+      var testPagesLocation = settingsPage.evaluate(function () {
+        return testPagesLocation;
+      });
+      if (testPagesLocation && testPagesLocation.ExpectedPath) {
+        console.log("Error loading test settings. Expected path: " + testPagesLocation.ExpectedPath);
+      } else {
+        console.log("Error loading test settings.");
+      }
+      console.log("Test execution terminated.");
       phantom.exit(-1);
     }
   });
