@@ -67,6 +67,7 @@
 
         if (bindingSeenTimeDelta > 2000 && testRunner != null) {
           window.clearInterval(taskId);
+          console.groupEnd();
           testRunner();
         }
       }
@@ -118,6 +119,8 @@
               console.info('In order to enable testing test fixture have to return "true" boolean value');
               return;
             }
+
+            console.groupCollapsed("SPEAK debug output");
 
             testRunner = function () {
               console.log('Running tests.');
