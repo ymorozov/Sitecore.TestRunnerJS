@@ -1,4 +1,11 @@
-﻿0.7.2
+﻿0.8.0
+* [NEW] #2: Load test fixtures and phantomjs settings directly from server
+* [NEW] Show info message if testing disabled in test fixture
+* [NEW] #8: Move all SPEAK debug output into console group
+* [NEW] #5: Output fake requests/responses into console
+* [NEW] #3: Display expected application settings file location if not found
+
+0.7.2
 * [FIX] Support PhantomJS from 1.9.1 to 1.9.8 
 
 0.7.1

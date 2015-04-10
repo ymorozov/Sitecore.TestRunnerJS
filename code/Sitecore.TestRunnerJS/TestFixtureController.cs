@@ -1,63 +1,71 @@
 ﻿namespace Sitecore.TestRunnerJS
 {
-    using System;
-    using System.IO;
-    using System.Net;
-    using System.Net.Http;
-    using System.Net.Http.Headers;
-    using System.Web;
-    using System.Web.Hosting;
-    using System.Web.Http;
+  using System;
+  using System.Web;
+  using System.Web.Http;
 
-    public class TestFixtureController : ApiController
+  public class TestFixtureController : ApiController
   {
     private const string TestFixtureParameterName = "sc_testfixture";
 
-    [HttpGet]
-    public HttpResponseMessage GetByUrl(string url)
+    private readonly FileService fileService;
+
+    private readonly ConfigSettings settings;
+
+    public TestFixtureController()
+      : this(new FileService(), new ConfigSettings())
     {
-      var uri = new Uri(url);
+    }
+
+    public TestFixtureController(FileService fileService, ConfigSettings settings)
+    {
+      this.fileService = fileService;
+      this.settings = settings;
+    }
+
+    [HttpGet]
+    public TestFixtureModel GetByUrl(string url)
+    {
+      Uri uri;
+      if (!Uri.TryCreate(url, UriKind.Absolute, out uri))
+      {
+        return new TestFixtureModel();
+      }
+
       var queryParameters = HttpUtility.ParseQueryString(uri.Query);
 
       var normalizedUrl = uri.LocalPath.ToLowerInvariant();
       var applicationUrlParts = normalizedUrl.Split(new[] { @"/sitecore/client/applications/" }, StringSplitOptions.None);
 
-      if (applicationUrlParts.Length == 2)
+      if (applicationUrlParts.Length != 2)
       {
-        var applicationUrlPart = applicationUrlParts[1];
-        var applicationUrlParameterParts = applicationUrlPart.Split('/');
-
-        if (applicationUrlParameterParts.Length >= 1)
-        {
-          var testFixtureParameter = queryParameters.Get(TestFixtureParameterName);
-          if (!string.IsNullOrEmpty(testFixtureParameter))
-          {
-            applicationUrlParameterParts[applicationUrlParameterParts.Length - 1] = testFixtureParameter;
-          }
-
-          var pageRelativePath = string.Join(@"/", applicationUrlParameterParts);
-
-          var testFixturePath = HostingEnvironment.MapPath(
-            "~/" + ConfigSettings.RootTestFixturesFolder + "/" + pageRelativePath + ".js");
-
-          if (File.Exists(testFixturePath))
-          {
-            return this.GetResponseMessage(testFixturePath);
-          }
-        }
+        return new TestFixtureModel();
       }
 
-      var notFoundPath = HostingEnvironment.MapPath("~/sitecore/TestRunnerJS/assets/testsnotfound.js");
-      return this.GetResponseMessage(notFoundPath);
+      var applicationUrlPart = applicationUrlParts[1];
+      var applicationUrlParameterParts = applicationUrlPart.Split('/');
+
+      var testFixtureParameter = queryParameters.Get(TestFixtureParameterName);
+      if (!string.IsNullOrEmpty(testFixtureParameter))
+      {
+        applicationUrlParameterParts[applicationUrlParameterParts.Length - 1] = testFixtureParameter;
+      }
+
+      var pageRelativePath = string.Join(@"/", applicationUrlParameterParts);
+      var testFixtureRelativePath = this.settings.RootTestFixturesFolder + "/" + pageRelativePath + ".js";
+
+      var testFixturePath = this.fileService.MapPath("~/" + testFixtureRelativePath);
+
+      return new TestFixtureModel { ExpectedPath = testFixtureRelativePath, IsExist = this.fileService.FileExists(testFixturePath) };
     }
 
-    private HttpResponseMessage GetResponseMessage(string testFixturePath)
+    [HttpGet]
+    public TestFixtureModel GetSettings(string application)
     {
-      var result = new HttpResponseMessage(HttpStatusCode.OK);
-      var stream = new FileStream(testFixturePath, FileMode.Open);
-      result.Content = new StreamContent(stream);
-      result.Content.Headers.ContentType = new MediaTypeHeaderValue("text/javascript");
-      return result;
+      var relativePath = this.settings.RootTestFixturesFolder + "/" + application + ".json";
+      var absolutePath = this.fileService.MapPath("~/" + relativePath);
+
+      return new TestFixtureModel { ExpectedPath = relativePath, IsExist = this.fileService.FileExists(absolutePath) };
     }
   }
 }

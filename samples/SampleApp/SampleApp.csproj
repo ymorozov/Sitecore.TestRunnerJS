@@ -85,7 +85,7 @@
   <ItemGroup>
     <Content Include="sitecore\shell\client\Applications\SampleApp\first.js" />
     <Content Include="sitecore\shell\client\Applications\SampleApp\second.js" />
-    <Content Include="sitecore\shell\client\Tests\sampleApp.js" />
+    <None Include="sitecore\shell\client\Tests\sampleApp.json" />
     <Content Include="sitecore\shell\client\Tests\SampleApp\firstPage.js" />
     <Content Include="sitecore\shell\client\Tests\SampleApp\FirstPage\Pages\additionalTests.js" />
     <Content Include="sitecore\shell\client\Tests\SampleApp\FirstPage\Pages\secondPage.js" />

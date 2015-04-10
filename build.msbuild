@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="StartBuild" ToolsVersion="4.0">
   <Import Project="build.config" />
+  
+  <UsingTask TaskName="xunit" AssemblyFile="$(XUnitRunner)" />
 
   <Target Name="Clean">
     <MSBuild Projects="@(ProjectToBuild)" Targets="Clean" Properties="Configuration=Debug" />
@@ -17,7 +19,11 @@
     <MSBuild Projects="$(ProjectToBuild)" Properties="Configuration=Release" />
   </Target>
 
-  <Target Name="Output" DependsOnTargets="Build">
+  <Target Name="Test" DependsOnTargets="Build">
+    <xunit Assemblies="$(TestsAssembly)" />
+  </Target>
+
+  <Target Name="Output" DependsOnTargets="Test">
     <MakeDir Directories="$(TempFolder)\bin" />
     <Copy SourceFiles="$(SourceFolder)\Sitecore.TestRunnerJS\bin\release\Sitecore.TestRunnerJS.dll" DestinationFolder="$(TempFolder)\bin" />
     <Copy SourceFiles="$(SourceFolder)\Sitecore.TestRunnerJS\bin\release\Sitecore.TestRunnerJS.pdb" DestinationFolder="$(TempFolder)\bin" />
