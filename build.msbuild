@@ -21,6 +21,8 @@
 
   <Target Name="Test" DependsOnTargets="Build">
     <xunit Assemblies="$(TestsAssembly)" />
+
+    <Exec Command="$(IISExpressExecurionString)"/>
   </Target>
 
   <Target Name="Output" DependsOnTargets="Test">
