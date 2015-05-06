@@ -66,6 +66,7 @@
     <Content Include="sitecore\TestRunnerJS\phantom\loader.js" />
     <Content Include="sitecore\TestRunnerJS\phantom\report.js" />
     <Content Include="sitecore\TestRunnerJS\phantom\settings.html" />
+    <Content Include="Tests\fixture.js" />
     <Content Include="Tests\libs\main.js" />
     <Content Include="Tests\libs\mocha.css" />
     <Content Include="Tests\libs\require.js" />
@@ -75,6 +76,7 @@
     <Content Include="App_Config\Include\Sitecore.TestRunnerJS.config" />
     <None Include="packages.config" />
     <None Include="sitecore\TestRunnerJS\phantom\run.ps1" />
+    <None Include="Tests\libs\mocha-phantomjs.coffee" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

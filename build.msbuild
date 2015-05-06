@@ -24,7 +24,7 @@
     <xunit Assemblies="$(TestsAssembly)" />
 
     <Exec Command="$(IISExpressStart)"/>
-  
+    <Exec Command="$(PhantomJS) $(SiteRoot)\Tests\libs\mocha-phantomjs.coffee http://localhost:$(SitePort)/tests/tests.html tap"/>
     <Exec Command="$(IISExpressStop)"/>
   </Target>
 
