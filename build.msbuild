@@ -5,6 +5,7 @@
   <UsingTask TaskName="xunit" AssemblyFile="$(XUnitRunner)" />
 
   <Target Name="Clean">
+    <Exec Command="$(IISExpressStop)"/>
     <MSBuild Projects="@(ProjectToBuild)" Targets="Clean" Properties="Configuration=Debug" />
     <MSBuild Projects="@(ProjectToBuild)" Targets="Clean" Properties="Configuration=Release" />
     <RemoveDir Directories="$(TempFolder)" />
@@ -22,7 +23,9 @@
   <Target Name="Test" DependsOnTargets="Build">
     <xunit Assemblies="$(TestsAssembly)" />
 
-    <Exec Command="$(IISExpressExecurionString)"/>
+    <Exec Command="$(IISExpressStart)"/>
+  
+    <Exec Command="$(IISExpressStop)"/>
   </Target>
 
   <Target Name="Output" DependsOnTargets="Test">
