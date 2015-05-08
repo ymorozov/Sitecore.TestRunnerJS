@@ -63,13 +63,14 @@
     <Content Include="sitecore\TestRunnerJS\libs\mocha.js" />
     <Content Include="sitecore\TestRunnerJS\libs\sinon.js" />
     <Content Include="sitecore\TestRunnerJS\assets\bootstrapper.js" />
+    <Content Include="sitecore\TestRunnerJS\phantom\inputParams.js" />
     <Content Include="sitecore\TestRunnerJS\phantom\loader.js" />
     <Content Include="sitecore\TestRunnerJS\phantom\report.js" />
     <Content Include="sitecore\TestRunnerJS\phantom\settings.html" />
-    <Content Include="Tests\fixture.js" />
     <Content Include="Tests\libs\main.js" />
     <Content Include="Tests\libs\mocha.css" />
     <Content Include="Tests\libs\require.js" />
+    <Content Include="Tests\phantom\inputParamsTest.js" />
     <Content Include="Tests\tests.html" />
   </ItemGroup>
   <ItemGroup>
