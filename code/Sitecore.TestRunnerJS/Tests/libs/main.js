@@ -7,7 +7,7 @@
 
   // ADD ANY TESTS HERE
   var tests = [
-    '/tests/fixture.js'
+    '/tests/phantom/inputParamsTest.js'
   ];
 
   require(tests, function () {
