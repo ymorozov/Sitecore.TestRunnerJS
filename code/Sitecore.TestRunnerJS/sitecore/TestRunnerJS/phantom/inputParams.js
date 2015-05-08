@@ -1,7 +1,12 @@
 ﻿(function () {
   var extObj = {
     parse: function (args) {
+      var settings = {
+        instanceName: args[1],
+        applicationName: args[2]
+    }
 
+      return settings;
     }
   }
 
