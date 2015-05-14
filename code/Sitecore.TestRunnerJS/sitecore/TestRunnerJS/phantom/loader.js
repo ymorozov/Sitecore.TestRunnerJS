@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
   var Reporter, USAGE, config, fs, mocha, reporter, system, webpage,
     __bind = function (fn, me) { return function () { return fn.apply(me, arguments); }; };
 
@@ -101,9 +101,13 @@
         }
       };
 
-      this.page.onResourceError = function (resErr) {
-        return system.stdout.writeLine("Error loading resource " + resErr.url + " (" + resErr.errorCode + "). Details: " + resErr.errorString);
-      };
+      this.page.onResourceError = (function (_this) {
+        return function (resErr) {
+          if (!_this.config.ignoreResourceErrors) {
+            return system.stdout.writeLine("Error loading resource " + resErr.url + " (" + resErr.errorCode + "). Details: " + resErr.errorString);
+          }
+        };
+      })(this);
       this.page.onError = (function (_this) {
         return function (msg, traces) {
           var file, index, line, _j, _len1, _ref1;
@@ -128,6 +132,7 @@
               ended: false,
               started: false,
               run: function () {
+                mochaPhantomJS.runArgs = arguments;
                 mochaPhantomJS.started = true;
                 window.callPhantom({
                   'mochaPhantomJS.run': true
@@ -159,6 +164,8 @@
             if (_this.injectJS()) {
               _this.waitForRunMocha();
             }
+          } else if (typeof (data != null ? data.screenshot : void 0) === "string") {
+            _this.page.render(data.screenshot + ".png");
           }
           return true;
         };
@@ -184,11 +191,16 @@
 
     Reporter.prototype.runMocha = function () {
       var customReporter, wrappedReporter, wrapper, _base;
-      if (this.config.useColors === false) {
-        this.page.evaluate(function () {
-          return mocha.useColors(false);
-        });
-      }
+      this.page.evaluate(function (config) {
+        mocha.useColors(config.useColors);
+        mocha.bail(config.bail);
+        if (config.grep) {
+          mocha.grep(config.grep);
+        }
+        if (config.invert) {
+          return mocha.invert();
+        }
+      }, this.config);
       if (typeof (_base = this.config.hooks).beforeStart === "function") {
         _base.beforeStart(this);
       }
@@ -284,7 +296,7 @@
     Reporter.prototype.runner = function () {
       var cleanup, error, _ref, _ref1;
       try {
-        mochaPhantomJS.runner = mocha.run();
+        mochaPhantomJS.runner = mocha.run.apply(mocha, mochaPhantomJS.runArgs);
         if (mochaPhantomJS.runner) {
           cleanup = function () {
             mochaPhantomJS.failures = mochaPhantomJS.runner.failures;
