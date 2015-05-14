@@ -8,7 +8,7 @@
 
   fs = require('fs');
 
-  USAGE = "Usage: phantomjs loader.js instance_name application_name [report_path] [macha_load_timeout]";
+  USAGE = "Usage: phantomjs loader.js instance_name application_name [-r report_path] [-t macha_load_timeout]";
 
   Reporter = (function () {
     function Reporter(config, url) {
@@ -319,16 +319,30 @@
 
   })();
 
-  config = {};
-
   var instanceName = system.args[1];
   console.log('Working instance: ' + instanceName);
 
   var applicationName = system.args[2];
   console.log('Application name: ' + applicationName);
   
-  config.reporter = system.args[3] || 'report.js';
-  config.timeout = parseInt(system.args[4]) || 30000;
+  var minimistConfig = {
+    alias: {
+      t: 'timeout',
+      g: 'grep',
+      i: 'invert',
+      r: 'reporter',
+      v: 'verbose'
+    },
+    boolean: [
+      'invert',
+      'verbose'
+    ],
+    default: {
+      timeout: 30000,
+      reporter: 'report.js'
+    }
+  };
+  config = require('./minimist')(system.args.slice(3), minimistConfig);
 
   var testResults = { fail: 0, pass: 0, total: 0 };
   var startTime = (new Date()).getTime();
@@ -392,8 +406,6 @@
     }
 
     config.cookies = loginCookies;
-
-    config.verbose = false;
 
     if (config.hooks) {
       config.hooks = require(config.hooks);

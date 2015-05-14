@@ -3,7 +3,13 @@ param(
   [string]$instanceName,
 
   [Parameter(Mandatory=$True,Position=1)]
-  [string]$applicationName
+  [string]$applicationName,
+
+  [Parameter(Mandatory=$False,Position=2)]
+  [string]$grep,
+
+  [Parameter(Mandatory=$False,Position=3)]
+  [Switch]$invert
 )
 
 $packages = Split-Path (Split-Path $PSScriptRoot)
@@ -17,4 +23,4 @@ if($phantomPackage -is [system.array])
 $phantomPath = Join-Path ($phantomPackage) tools\phantomjs\phantomjs.exe
 $runnerScript = Join-Path ($PSScriptRoot) sitecore\TestRunnerJS\phantom\run.ps1
 
-&$runnerScript -instanceName $instanceName -applicationName $applicationName -phantomPath $phantomPath
+&$runnerScript -instanceName $instanceName -applicationName $applicationName -phantomPath $phantomPath -grep $grep
