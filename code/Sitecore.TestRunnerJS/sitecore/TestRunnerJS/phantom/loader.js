@@ -324,14 +324,15 @@
 
   var applicationName = system.args[2];
   console.log('Application name: ' + applicationName);
-  
+
   var minimistConfig = {
     alias: {
       t: 'timeout',
       g: 'grep',
       i: 'invert',
       r: 'reporter',
-      v: 'verbose'
+      v: 'verbose',
+      u: 'url'
     },
     boolean: [
       'invert',
@@ -347,36 +348,40 @@
   var testResults = { fail: 0, pass: 0, total: 0 };
   var startTime = (new Date()).getTime();
 
-  var settingsPage = webpage.create();
-  settingsPage.open("http://" + instanceName + "/sitecore/testrunnerjs/phantom/settings.html?app=" + applicationName, function () {
-    console.log('Loading test settings.');
+  if (config.url) {
+    loginIntoSitecore([config.url]);
+  } else {
+    var settingsPage = webpage.create();
+    settingsPage.open("http://" + instanceName + "/sitecore/testrunnerjs/phantom/settings.html?app=" + applicationName, function () {
+      console.log('Loading test settings.');
 
-    var testPagesResult = settingsPage.evaluate(function () {
-      return testPages;
-    });
-    settingsPage.close();
-
-    if (testPagesResult) {
-      console.log('Test settings was loaded.');
-
-      var pagesUnderTest = [];
-      for (var i = 0; i < testPagesResult.length; i++) {
-        pagesUnderTest.push(testPagesResult[i]);
-      }
-      loginIntoSitecore(pagesUnderTest);
-    } else {
-      var testPagesLocation = settingsPage.evaluate(function () {
-        return testPagesLocation;
+      var testPagesResult = settingsPage.evaluate(function () {
+        return testPages;
       });
-      if (testPagesLocation && testPagesLocation.ExpectedPath) {
-        console.log("Error loading test settings. Expected path: " + testPagesLocation.ExpectedPath);
+      settingsPage.close();
+
+      if (testPagesResult) {
+        console.log('Test settings was loaded.');
+
+        var pagesUnderTest = [];
+        for (var i = 0; i < testPagesResult.length; i++) {
+          pagesUnderTest.push(testPagesResult[i]);
+        }
+        loginIntoSitecore(pagesUnderTest);
       } else {
-        console.log("Error loading test settings.");
+        var testPagesLocation = settingsPage.evaluate(function () {
+          return testPagesLocation;
+        });
+        if (testPagesLocation && testPagesLocation.ExpectedPath) {
+          console.log("Error loading test settings. Expected path: " + testPagesLocation.ExpectedPath);
+        } else {
+          console.log("Error loading test settings.");
+        }
+        console.log("Test execution terminated.");
+        phantom.exit(-1);
       }
-      console.log("Test execution terminated.");
-      phantom.exit(-1);
-    }
-  });
+    });
+  }
 
   function loginIntoSitecore(pagesUnderTest) {
     var loginPageUrl = "http://" + instanceName + "/sitecore/login";
