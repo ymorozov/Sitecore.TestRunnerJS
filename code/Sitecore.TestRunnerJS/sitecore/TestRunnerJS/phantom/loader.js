@@ -423,14 +423,15 @@
 
   function runTestsOnPages(pagesUnderTest) {
     if (pagesUnderTest.length > 0) {
-      var testPage = "http://" + instanceName + pagesUnderTest[0];
+      var pageUnderTest = pagesUnderTest[0];
+      var testPageUrl = "http://" + instanceName + pageUnderTest;
       pagesUnderTest.splice(0, 1);
 
-      console.log('Testing page: ' + testPage);
-      var runner = new Reporter(config, testPage);
+      console.log('Testing page: ' + testPageUrl);
+      var runner = new Reporter(config, testPageUrl);
       runner.run();
 
-      waitForTestEnd(runner, function () { runTestsOnPages(pagesUnderTest); });
+      waitForTestEnd(runner, pageUnderTest, function () { runTestsOnPages(pagesUnderTest); });
     } else {
       console.log('Tests execution was finished.');
       var time = (new Date()).getTime() - startTime;
@@ -444,16 +445,17 @@
     }
   }
 
-  function waitForTestEnd(runner, callback) {
+  function waitForTestEnd(runner, testPage, callback) {
     try {
       if (runner.testsComplete) {
         testResults.total += runner.testResults.total;
         testResults.pass += runner.testResults.pass;
         testResults.fail += runner.testResults.fail;
+        testResults.details.push({ page: testPage, data: runner.testResults });
 
         callback();
       } else {
-        setTimeout(function () { waitForTestEnd(runner, callback); }, 50);
+        setTimeout(function () { waitForTestEnd(runner, testPage, callback); }, 50);
       }
     } catch (e) {
       return phantom.exit(e.code || 1);
