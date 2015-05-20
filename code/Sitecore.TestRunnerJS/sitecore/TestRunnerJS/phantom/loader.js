@@ -345,7 +345,7 @@
   };
   config = require('./minimist')(system.args.slice(3), minimistConfig);
 
-  var testResults = { fail: 0, pass: 0, total: 0 };
+  var testResults = { fail: 0, pass: 0, total: 0, details: [] };
   var startTime = (new Date()).getTime();
 
   if (config.url) {
@@ -451,7 +451,7 @@
         testResults.total += runner.testResults.total;
         testResults.pass += runner.testResults.pass;
         testResults.fail += runner.testResults.fail;
-        testResults.details.push({ page: testPage, data: runner.testResults });
+        testResults.details.push({ page: testPage, data: runner.testResults.details });
 
         callback();
       } else {
