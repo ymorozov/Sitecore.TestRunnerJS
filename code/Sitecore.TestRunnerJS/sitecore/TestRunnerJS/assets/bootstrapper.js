@@ -47,7 +47,7 @@
   function requestOutput() {
     if (fakeRequests.length !== 0) {
       console.groupCollapsed('Fake requests (' + fakeRequests.length + ')');
-      fakeRequests.forEach(function(item) {
+      fakeRequests.forEach(function (item) {
         console.log(item);
       });
       console.groupEnd();
@@ -142,7 +142,7 @@
             testRunner = function () {
               console.log('Running tests.');
               if (window.mochaPhantomJS) {
-                mochaPhantomJS.stats = { fail: 0, pass: 0, total: 0 };
+                mochaPhantomJS.stats = { fail: 0, pass: 0, total: 0, details: [] };
                 mochaPhantomJS.run();
               } else {
                 require(['loca'], function () {

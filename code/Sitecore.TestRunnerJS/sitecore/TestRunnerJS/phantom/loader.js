@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
   var Reporter, USAGE, config, fs, mocha, reporter, system, webpage,
     __bind = function (fn, me) { return function () { return fn.apply(me, arguments); }; };
 
@@ -8,7 +8,7 @@
 
   fs = require('fs');
 
-  USAGE = "Usage: phantomjs loader.js instance_name application_name [report_path] [macha_load_timeout]";
+  USAGE = "Usage: phantomjs loader.js instance_name application_name [-r report_path] [-t macha_load_timeout]";
 
   Reporter = (function () {
     function Reporter(config, url) {
@@ -101,9 +101,13 @@
         }
       };
 
-      this.page.onResourceError = function (resErr) {
-        return system.stdout.writeLine("Error loading resource " + resErr.url + " (" + resErr.errorCode + "). Details: " + resErr.errorString);
-      };
+      this.page.onResourceError = (function (_this) {
+        return function (resErr) {
+          if (!_this.config.ignoreResourceErrors) {
+            return system.stdout.writeLine("Error loading resource " + resErr.url + " (" + resErr.errorCode + "). Details: " + resErr.errorString);
+          }
+        };
+      })(this);
       this.page.onError = (function (_this) {
         return function (msg, traces) {
           var file, index, line, _j, _len1, _ref1;
@@ -128,6 +132,7 @@
               ended: false,
               started: false,
               run: function () {
+                mochaPhantomJS.runArgs = arguments;
                 mochaPhantomJS.started = true;
                 window.callPhantom({
                   'mochaPhantomJS.run': true
@@ -159,6 +164,8 @@
             if (_this.injectJS()) {
               _this.waitForRunMocha();
             }
+          } else if (typeof (data != null ? data.screenshot : void 0) === "string") {
+            _this.page.render(data.screenshot + ".png");
           }
           return true;
         };
@@ -184,11 +191,16 @@
 
     Reporter.prototype.runMocha = function () {
       var customReporter, wrappedReporter, wrapper, _base;
-      if (this.config.useColors === false) {
-        this.page.evaluate(function () {
-          return mocha.useColors(false);
-        });
-      }
+      this.page.evaluate(function (config) {
+        mocha.useColors(config.useColors);
+        mocha.bail(config.bail);
+        if (config.grep) {
+          mocha.grep(config.grep);
+        }
+        if (config.invert) {
+          return mocha.invert();
+        }
+      }, this.config);
       if (typeof (_base = this.config.hooks).beforeStart === "function") {
         _base.beforeStart(this);
       }
@@ -284,7 +296,7 @@
     Reporter.prototype.runner = function () {
       var cleanup, error, _ref, _ref1;
       try {
-        mochaPhantomJS.runner = mocha.run();
+        mochaPhantomJS.runner = mocha.run.apply(mocha, mochaPhantomJS.runArgs);
         if (mochaPhantomJS.runner) {
           cleanup = function () {
             mochaPhantomJS.failures = mochaPhantomJS.runner.failures;
@@ -307,50 +319,70 @@
 
   })();
 
-  config = {};
-
   var instanceName = system.args[1];
   console.log('Working instance: ' + instanceName);
 
   var applicationName = system.args[2];
   console.log('Application name: ' + applicationName);
-  
-  config.reporter = system.args[3] || 'report.js';
-  config.timeout = parseInt(system.args[4]) || 30000;
 
-  var testResults = { fail: 0, pass: 0, total: 0 };
+  var minimistConfig = {
+    alias: {
+      t: 'timeout',
+      g: 'grep',
+      i: 'invert',
+      r: 'reporter',
+      v: 'verbose',
+      u: 'url',
+      o: 'outputReportPath'
+    },
+    boolean: [
+      'invert',
+      'verbose'
+    ],
+    default: {
+      timeout: 30000,
+      reporter: 'report.js'
+    }
+  };
+  config = require('./minimist')(system.args.slice(3), minimistConfig);
+
+  var testResults = { fail: 0, pass: 0, total: 0, details: [] };
   var startTime = (new Date()).getTime();
 
-  var settingsPage = webpage.create();
-  settingsPage.open("http://" + instanceName + "/sitecore/testrunnerjs/phantom/settings.html?app=" + applicationName, function () {
-    console.log('Loading test settings.');
+  if (config.url) {
+    loginIntoSitecore([config.url]);
+  } else {
+    var settingsPage = webpage.create();
+    settingsPage.open("http://" + instanceName + "/sitecore/testrunnerjs/phantom/settings.html?app=" + applicationName, function () {
+      console.log('Loading test settings.');
 
-    var testPagesResult = settingsPage.evaluate(function () {
-      return testPages;
-    });
-    settingsPage.close();
-
-    if (testPagesResult) {
-      console.log('Test settings was loaded.');
-
-      var pagesUnderTest = [];
-      for (var i = 0; i < testPagesResult.length; i++) {
-        pagesUnderTest.push(testPagesResult[i]);
-      }
-      loginIntoSitecore(pagesUnderTest);
-    } else {
-      var testPagesLocation = settingsPage.evaluate(function () {
-        return testPagesLocation;
+      var testPagesResult = settingsPage.evaluate(function () {
+        return testPages;
       });
-      if (testPagesLocation && testPagesLocation.ExpectedPath) {
-        console.log("Error loading test settings. Expected path: " + testPagesLocation.ExpectedPath);
+      settingsPage.close();
+
+      if (testPagesResult) {
+        console.log('Test settings was loaded.');
+
+        var pagesUnderTest = [];
+        for (var i = 0; i < testPagesResult.length; i++) {
+          pagesUnderTest.push(testPagesResult[i]);
+        }
+        loginIntoSitecore(pagesUnderTest);
       } else {
-        console.log("Error loading test settings.");
+        var testPagesLocation = settingsPage.evaluate(function () {
+          return testPagesLocation;
+        });
+        if (testPagesLocation && testPagesLocation.ExpectedPath) {
+          console.log("Error loading test settings. Expected path: " + testPagesLocation.ExpectedPath);
+        } else {
+          console.log("Error loading test settings.");
+        }
+        console.log("Test execution terminated.");
+        phantom.exit(-1);
       }
-      console.log("Test execution terminated.");
-      phantom.exit(-1);
-    }
-  });
+    });
+  }
 
   function loginIntoSitecore(pagesUnderTest) {
     var loginPageUrl = "http://" + instanceName + "/sitecore/login";
@@ -381,8 +413,6 @@
 
     config.cookies = loginCookies;
 
-    config.verbose = false;
-
     if (config.hooks) {
       config.hooks = require(config.hooks);
     } else {
@@ -394,18 +424,29 @@
 
   function runTestsOnPages(pagesUnderTest) {
     if (pagesUnderTest.length > 0) {
-      var testPage = "http://" + instanceName + pagesUnderTest[0];
+      var pageUnderTest = pagesUnderTest[0];
+      var testPageUrl = "http://" + instanceName + pageUnderTest;
       pagesUnderTest.splice(0, 1);
 
-      console.log('Testing page: ' + testPage);
-      var runner = new Reporter(config, testPage);
+      console.log('Testing page: ' + testPageUrl);
+      var runner = new Reporter(config, testPageUrl);
       runner.run();
 
-      waitForTestEnd(runner, function () { runTestsOnPages(pagesUnderTest); });
+      waitForTestEnd(runner, pageUnderTest, function () { runTestsOnPages(pagesUnderTest); });
     } else {
       console.log('Tests execution was finished.');
       var time = (new Date()).getTime() - startTime;
+      testResults.duration = time;
       console.log('Passed: ' + testResults.pass + ' Failed: ' + testResults.fail + ' Total: ' + testResults.total + ' Time: ' + time + 'ms');
+
+      // Generate test report.
+      if (config.outputReportPath) {
+        var hbars = require('./handlebars.js');
+        var source = fs.read(phantom.libraryPath + '/reportTemplate.html');
+        var template = hbars.compile(source);
+        var content = template(testResults);
+        fs.write(config.outputReportPath, content, 'w');
+      }
 
       // Turn off testing mode.
       var launchpadPage = webpage.create();
@@ -415,16 +456,17 @@
     }
   }
 
-  function waitForTestEnd(runner, callback) {
+  function waitForTestEnd(runner, testPage, callback) {
     try {
       if (runner.testsComplete) {
         testResults.total += runner.testResults.total;
         testResults.pass += runner.testResults.pass;
         testResults.fail += runner.testResults.fail;
+        testResults.details.push({ page: testPage, data: runner.testResults.details });
 
         callback();
       } else {
-        setTimeout(function () { waitForTestEnd(runner, callback); }, 50);
+        setTimeout(function () { waitForTestEnd(runner, testPage, callback); }, 50);
       }
     } catch (e) {
       return phantom.exit(e.code || 1);

@@ -25,17 +25,25 @@ function FAP(runner) {
 
   runner.on('pending', function (test) {
     log('[SKIP]' + title(test));
+    mochaPhantomJS.stats.details.push({ skip: true, title: title(test) });
   });
 
   runner.on('pass', function (test) {
     passes++;
     log('[PASS] ' + title(test));
+    mochaPhantomJS.stats.details.push({ pass: true, title: title(test) });
   });
 
   runner.on('fail', function (test, err) {
     failures++;
     log('[FAIL] ' + title(test));
-    if (err.stack) log(err.stack.replace(/^/gm, '  '));
+    var failureData = { fail: true, title: title(test) };
+    if (err.stack) {
+      var stack = err.stack.replace(/^/gm, '  ');
+      log(stack);
+      failureData.stack = stack;
+    }
+    mochaPhantomJS.stats.details.push(failureData);
   });
 
   runner.on('end', function () {
