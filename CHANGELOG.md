@@ -1,4 +1,10 @@
-﻿0.8.0
+﻿0.9.0
+* [NEW] #7: Generate html report
+* [NEW] #13: Run different sets of tests by grep
+* [NEW] Specify page under test url from command line
+* [NEW] Imporve command line parameters
+
+0.8.0
 * [NEW] #2: Load test fixtures and phantomjs settings directly from server
 * [NEW] Show info message if testing disabled in test fixture
 * [NEW] #8: Move all SPEAK debug output into console group
