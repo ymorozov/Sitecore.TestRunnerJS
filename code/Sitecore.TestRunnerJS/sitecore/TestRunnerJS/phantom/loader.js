@@ -332,7 +332,8 @@
       i: 'invert',
       r: 'reporter',
       v: 'verbose',
-      u: 'url'
+      u: 'url',
+      o: 'outputReportPath'
     },
     boolean: [
       'invert',
@@ -439,11 +440,13 @@
       console.log('Passed: ' + testResults.pass + ' Failed: ' + testResults.fail + ' Total: ' + testResults.total + ' Time: ' + time + 'ms');
 
       // Generate test report.
-      var hbars = require('./handlebars.js');
-      var source = fs.read(phantom.libraryPath + '/reportTemplate.html');
-      var template = hbars.compile(source);
-      var content = template(testResults);
-      fs.write(phantom.libraryPath + '/report.html', content, 'w');
+      if (config.outputReportPath) {
+        var hbars = require('./handlebars.js');
+        var source = fs.read(phantom.libraryPath + '/reportTemplate.html');
+        var template = hbars.compile(source);
+        var content = template(testResults);
+        fs.write(config.outputReportPath, content, 'w');
+      }
 
       // Turn off testing mode.
       var launchpadPage = webpage.create();
