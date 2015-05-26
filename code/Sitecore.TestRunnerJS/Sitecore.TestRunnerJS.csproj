@@ -66,6 +66,7 @@
     <Content Include="sitecore\TestRunnerJS\phantom\inputParams.js" />
     <Content Include="sitecore\TestRunnerJS\phantom\loader.js" />
     <Content Include="sitecore\TestRunnerJS\phantom\report.js" />
+    <Content Include="sitecore\TestRunnerJS\phantom\reportTemplate.html" />
     <Content Include="sitecore\TestRunnerJS\phantom\settings.html" />
     <Content Include="Tests\libs\main.js" />
     <Content Include="Tests\libs\mocha.css" />

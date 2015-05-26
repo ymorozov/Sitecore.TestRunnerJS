@@ -332,7 +332,8 @@
       i: 'invert',
       r: 'reporter',
       v: 'verbose',
-      u: 'url'
+      u: 'url',
+      o: 'outputReportPath'
     },
     boolean: [
       'invert',
@@ -345,7 +346,7 @@
   };
   config = require('./minimist')(system.args.slice(3), minimistConfig);
 
-  var testResults = { fail: 0, pass: 0, total: 0 };
+  var testResults = { fail: 0, pass: 0, total: 0, details: [] };
   var startTime = (new Date()).getTime();
 
   if (config.url) {
@@ -423,18 +424,29 @@
 
   function runTestsOnPages(pagesUnderTest) {
     if (pagesUnderTest.length > 0) {
-      var testPage = "http://" + instanceName + pagesUnderTest[0];
+      var pageUnderTest = pagesUnderTest[0];
+      var testPageUrl = "http://" + instanceName + pageUnderTest;
       pagesUnderTest.splice(0, 1);
 
-      console.log('Testing page: ' + testPage);
-      var runner = new Reporter(config, testPage);
+      console.log('Testing page: ' + testPageUrl);
+      var runner = new Reporter(config, testPageUrl);
       runner.run();
 
-      waitForTestEnd(runner, function () { runTestsOnPages(pagesUnderTest); });
+      waitForTestEnd(runner, pageUnderTest, function () { runTestsOnPages(pagesUnderTest); });
     } else {
       console.log('Tests execution was finished.');
       var time = (new Date()).getTime() - startTime;
+      testResults.duration = time;
       console.log('Passed: ' + testResults.pass + ' Failed: ' + testResults.fail + ' Total: ' + testResults.total + ' Time: ' + time + 'ms');
+
+      // Generate test report.
+      if (config.outputReportPath) {
+        var hbars = require('./handlebars.js');
+        var source = fs.read(phantom.libraryPath + '/reportTemplate.html');
+        var template = hbars.compile(source);
+        var content = template(testResults);
+        fs.write(config.outputReportPath, content, 'w');
+      }
 
       // Turn off testing mode.
       var launchpadPage = webpage.create();
@@ -444,16 +456,17 @@
     }
   }
 
-  function waitForTestEnd(runner, callback) {
+  function waitForTestEnd(runner, testPage, callback) {
     try {
       if (runner.testsComplete) {
         testResults.total += runner.testResults.total;
         testResults.pass += runner.testResults.pass;
         testResults.fail += runner.testResults.fail;
+        testResults.details.push({ page: testPage, data: runner.testResults.details });
 
         callback();
       } else {
-        setTimeout(function () { waitForTestEnd(runner, callback); }, 50);
+        setTimeout(function () { waitForTestEnd(runner, testPage, callback); }, 50);
       }
     } catch (e) {
       return phantom.exit(e.code || 1);
