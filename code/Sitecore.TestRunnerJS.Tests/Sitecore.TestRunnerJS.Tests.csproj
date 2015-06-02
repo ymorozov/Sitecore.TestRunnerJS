@@ -73,6 +73,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnsureTestRunnerEnabledTest.cs" />
     <Compile Include="Pipelines\Initialize\RegisterTestRunnerRoutesTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReflectionHelpers.cs" />
