@@ -1,57 +1,61 @@
 ﻿namespace Sitecore.TestRunnerJS.Pipelines.HttpRequest
 {
-  using System.Collections;
-  using System.Reflection;
-  using Sitecore.Configuration;
   using Sitecore.Pipelines.HttpRequest;
   using Sitecore.TestRunnerJS;
-  using Sitecore.Web;
 
   public class EnsureTestRunnerEnabled : HttpRequestProcessor
   {
+    public const string EnableTestRunnerParameter = "sc_testrunnerjs";
+
     private readonly ConfigSettings settings;
 
-    private const string EnableTestRunnerParameter = "sc_testrunnerjs";
+    private readonly SitecoreWrapper wrapper;
 
     private object previousValue;
 
-    public EnsureTestRunnerEnabled(ConfigSettings settings)
+    public EnsureTestRunnerEnabled(ConfigSettings settings, SitecoreWrapper wrapper)
     {
       this.settings = settings;
+      this.wrapper = wrapper;
     }
 
     public override void Process(HttpRequestArgs args)
     {
       var settingName = this.settings.RequireJSSettingName;
       var bootstrapPath = this.settings.BootstrapModulePath;
+      var configurationSettings = this.wrapper.GetSitecoreSettings();
 
-      if (WebUtil.GetQueryString(EnableTestRunnerParameter) != "1")
+      if (this.wrapper.GetQueryString(EnableTestRunnerParameter) != "1")
       {
-        if (WebUtil.GetQueryString(EnableTestRunnerParameter) == "0" && this.previousValue != null)
+        if (this.wrapper.GetQueryString(EnableTestRunnerParameter) != "0")
         {
-          this.GetSettings()[settingName] = this.previousValue;
-          Context.Diagnostics.Debugging = false;
+          if (this.previousValue != null)
+          {
+            this.wrapper.Debugging = true;
+          }
+
+          return;
         }
 
+        if (this.previousValue == null)
+        {
+          return;
+        }
+
+        configurationSettings[settingName] = this.previousValue;
+        this.wrapper.Debugging = false;
+
         return;
       }
 
-      Context.Diagnostics.Debugging = true;
-      if (Settings.GetSetting(settingName) == bootstrapPath)
+      this.wrapper.Debugging = true;
+      if ((string)configurationSettings[settingName] == bootstrapPath)
       {
         return;
       }
 
-      var settings = this.GetSettings();
-      this.previousValue = settings[settingName];
-      settings[settingName] = bootstrapPath;
-    }
-
-    private Hashtable GetSettings()
-    {
-      var type = typeof(Settings);
-      var info = type.GetField("settings", BindingFlags.NonPublic | BindingFlags.Static);
-      return (Hashtable)info.GetValue(null);
+      this.previousValue = configurationSettings[settingName];
+      configurationSettings[settingName] = bootstrapPath;
     }
   }
 }

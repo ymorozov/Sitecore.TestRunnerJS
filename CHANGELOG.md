@@ -1,4 +1,8 @@
-﻿0.9.0
+﻿0.9.1
+* [FIX] Escape phantomjs input parameters
+* [FIX] Should fail on phantomjs error 
+
+0.9.0
 * [NEW] #7: Generate html report
 * [NEW] #13: Run different sets of tests by grep
 * [NEW] Specify page under test url from command line

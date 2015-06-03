@@ -22,7 +22,7 @@ $loaderPath = "$PSScriptRoot\loader.js"
 $reportPath = "$PSScriptRoot\report.js"
 $timeout = 180000
 
-$executionExpression = "$phantomPath $loaderPath $instanceName $applicationName -r $reportPath -t $timeout"
+$executionExpression = "`"$phantomPath`" `"$loaderPath`" `"$instanceName`" `"$applicationName`" -r `"$reportPath`" -t $timeout"
 
 if($grep){
   $executionExpression = "$executionExpression -g `"$grep`""
@@ -38,6 +38,6 @@ if($outputReportPath){
 
 Invoke-Expression "& $executionExpression"
 
-if (!$?) { 
+if ($lastexitcode -gt 0) { 
   throw "Failures reported in javascript integration tests." 
 }
