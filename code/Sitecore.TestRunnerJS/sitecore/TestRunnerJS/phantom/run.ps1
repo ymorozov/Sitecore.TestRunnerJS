@@ -38,6 +38,6 @@ if($outputReportPath){
 
 Invoke-Expression "& $executionExpression"
 
-if (!$?) { 
+if ($lastexitcode -gt 0) { 
   throw "Failures reported in javascript integration tests." 
 }

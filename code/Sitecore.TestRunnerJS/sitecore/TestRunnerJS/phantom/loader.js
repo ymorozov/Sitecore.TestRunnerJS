@@ -379,7 +379,7 @@
           console.log("Error loading test settings.");
         }
         console.log("Test execution terminated.");
-        phantom.exit(-1);
+        phantom.exit(1);
       }
     });
   }
