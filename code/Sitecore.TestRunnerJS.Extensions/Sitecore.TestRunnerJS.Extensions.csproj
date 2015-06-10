@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -39,6 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgentResult.cs" />
+    <Compile Include="ConfigManager.cs" />
+    <Compile Include="IAgent.cs" />
+    <Compile Include="IAgentFactory.cs" />
+    <Compile Include="PhantomAgent.cs" />
+    <Compile Include="PhantomFactory.cs" />
     <Compile Include="TestRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
