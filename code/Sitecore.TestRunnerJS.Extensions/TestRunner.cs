@@ -13,6 +13,11 @@
       {
         var agent = this.agentFactory.Create();
         var result = agent.Run(url, grep);
+
+        if (result.FailedCount > 0)
+        {
+          throw new TestsFailedException(result.Message);
+        }
       }
     }
 }
