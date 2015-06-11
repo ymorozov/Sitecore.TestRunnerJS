@@ -2,11 +2,18 @@
 
 namespace Sitecore.TestRunnerJS.Extensions
 {
-  public class PhantomAgent : IAgent
+  public class PhantomAgent
   {
+    private readonly ConfigManager configManager;
+
     private const string PhantomJs = "phantomjs.exe";
 
-    public AgentResult Run()
+    public PhantomAgent(ConfigManager configManager)
+    {
+      this.configManager = configManager;
+    }
+
+    public virtual AgentResult Run(string url, string grep)
     {
       throw new NotImplementedException();
     }

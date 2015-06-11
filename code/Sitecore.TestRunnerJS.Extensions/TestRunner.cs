@@ -2,9 +2,9 @@
 {
     public class TestRunner
     {
-      private readonly IAgentFactory agentFactory;
+      private readonly PhantomFactory agentFactory;
 
-      public TestRunner(IAgentFactory agentFactory)
+      public TestRunner(PhantomFactory agentFactory)
       {
         this.agentFactory = agentFactory;
       }
@@ -12,7 +12,7 @@
       public virtual void Execute(string url, string grep)
       {
         var agent = this.agentFactory.Create();
-        var result = agent.Run();
+        var result = agent.Run(url, grep);
       }
     }
 }

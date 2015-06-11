@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EnsureTestRunnerEnabledTest.cs" />
+    <Compile Include="Extensions\PhantomFactoryTest.cs" />
     <Compile Include="Extensions\TestRunnerTest.cs" />
     <Compile Include="Pipelines\Initialize\RegisterTestRunnerRoutesTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,6 +89,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Sitecore.TestRunnerJS.Extensions\Sitecore.TestRunnerJS.Extensions.csproj">
+      <Project>{E9CB259E-8BFC-4700-B211-E62C4D1CCA6F}</Project>
+      <Name>Sitecore.TestRunnerJS.Extensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sitecore.TestRunnerJS\Sitecore.TestRunnerJS.csproj">
       <Project>{97AAC5D1-3521-411C-8F19-E1B5625F3D9E}</Project>
       <Name>Sitecore.TestRunnerJS</Name>

@@ -1,10 +1,17 @@
 ﻿namespace Sitecore.TestRunnerJS.Extensions
 {
-  public class PhantomFactory : IAgentFactory
+  public class PhantomFactory
   {
-    public IAgent Create()
+    private readonly ConfigManager configManager;
+
+    public PhantomFactory(ConfigManager configManager)
     {
-      return null;
+      this.configManager = configManager;
+    }
+
+    public virtual PhantomAgent Create()
+    {
+      return new PhantomAgent(this.configManager);
     }
   }
 }

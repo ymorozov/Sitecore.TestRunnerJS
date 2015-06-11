@@ -42,8 +42,6 @@
   <ItemGroup>
     <Compile Include="AgentResult.cs" />
     <Compile Include="ConfigManager.cs" />
-    <Compile Include="IAgent.cs" />
-    <Compile Include="IAgentFactory.cs" />
     <Compile Include="PhantomAgent.cs" />
     <Compile Include="PhantomFactory.cs" />
     <Compile Include="TestRunner.cs" />
