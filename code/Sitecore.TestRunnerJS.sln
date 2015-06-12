@@ -14,6 +14,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.TestRunnerJS.Tests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.TestRunnerJS.Extensions", "Sitecore.TestRunnerJS.Extensions\Sitecore.TestRunnerJS.Extensions.csproj", "{E9CB259E-8BFC-4700-B211-E62C4D1CCA6F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{C9BA2452-49BF-449D-9885-1CB24CD0B45F}"
+	ProjectSection(SolutionItems) = preProject
+		..\build.bat = ..\build.bat
+		..\build.config = ..\build.config
+		..\build.msbuild = ..\build.msbuild
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Packages", "Packages", "{DDEB9090-0D76-4BC7-A6A3-DD19DB126255}"
+	ProjectSection(SolutionItems) = preProject
+		Sitecore.TestRunnerJS.Extensions\Sitecore.TestRunnerJS.Extensions.nuspec = Sitecore.TestRunnerJS.Extensions\Sitecore.TestRunnerJS.Extensions.nuspec
+		Sitecore.TestRunnerJS\Sitecore.TestRunnerJS.nuspec = Sitecore.TestRunnerJS\Sitecore.TestRunnerJS.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
