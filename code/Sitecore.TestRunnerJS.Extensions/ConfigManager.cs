@@ -4,14 +4,19 @@
 
   public class ConfigManager
   {
-    public virtual string PhantomPath
+    public virtual string PackagePath
     {
-      get { return ConfigurationManager.AppSettings["PhantomPath"]; }
+      get { return ConfigurationManager.AppSettings["Sitecore.TestRunnerJS.PackagePath"]; }
     }
 
-    public virtual string TestRunnerPath
+    public virtual string ApplicationName
     {
-      get { return ConfigurationManager.AppSettings["TestRunnerPath"]; }
+      get { return ConfigurationManager.AppSettings["Sitecore.TestRunnerJS.ApplicationName"]; }
+    }
+
+    public virtual string InstanceName
+    {
+      get { return ConfigurationManager.AppSettings["Sitecore.TestRunnerJS.InstanceName"]; }
     }
   }
 }

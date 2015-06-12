@@ -27,6 +27,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Packages", "Packages", "{DD
 		Sitecore.TestRunnerJS\Sitecore.TestRunnerJS.nuspec = Sitecore.TestRunnerJS\Sitecore.TestRunnerJS.nuspec
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PSScripts", "PSScripts", "{CA3C220B-57F6-4ADD-810C-00EB66CC1D3B}"
+	ProjectSection(SolutionItems) = preProject
+		Sitecore.TestRunnerJS\Execute-TestRunner.ps1 = Sitecore.TestRunnerJS\Execute-TestRunner.ps1
+		Sitecore.TestRunnerJS\Init.ps1 = Sitecore.TestRunnerJS\Init.ps1
+		Sitecore.TestRunnerJS\Install.ps1 = Sitecore.TestRunnerJS\Install.ps1
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
