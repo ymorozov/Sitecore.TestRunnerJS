@@ -16,12 +16,14 @@ foreach ($project in $projects)
       $id = $package.id
       if ($id -eq "Sitecore.TestRunnerJS")
       {
-        Write-Host "TestRunnerJS files location: $toolsPath"
-        Write-Host "Installation location: $projectPath"
+				if (Test-Path "$projectPath\App_Config") {
+					Write-Host "TestRunnerJS files location: $toolsPath"
+					Write-Host "Installation location: $projectPath"
 
-        Copy-Item -Path "$toolsPath\*" -Destination "$projectPath" -Exclude "*.ps1" -recurse -Force
-        break
-      }
+					Copy-Item -Path "$toolsPath\*" -Destination "$projectPath" -Exclude "*.ps1" -recurse -Force
+					break
+				}
+			}
     }
   }
 }
