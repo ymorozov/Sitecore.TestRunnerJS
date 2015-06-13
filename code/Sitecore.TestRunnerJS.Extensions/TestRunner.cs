@@ -19,5 +19,10 @@
           throw new TestsFailedException(result.Message);
         }
       }
+
+      public static TestRunner Create()
+      {
+        return new TestRunner(new PhantomFactory(new ConfigManager()));
+      }
     }
 }
