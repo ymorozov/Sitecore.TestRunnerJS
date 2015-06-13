@@ -10,7 +10,7 @@
 
     private const string FileName = "powershell.exe";
 
-    private const string ArgsPattern = "-file \"Execute-TestRunner.ps1\" \"{0}\" \"{1}\" \"-grep\" \"{2}\" \"-url\" \"{3}\"";
+    private const string ArgsPattern = "-NoProfile -ExecutionPolicy unrestricted -file \"Execute-TestRunner.ps1\" \"{0}\" \"{1}\" \"-grep\" \"{2}\" \"-url\" \"{3}\"";
 
     public PhantomAgent(ConfigManager configManager)
     {

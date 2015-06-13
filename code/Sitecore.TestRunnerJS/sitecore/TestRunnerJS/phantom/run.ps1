@@ -15,7 +15,7 @@ param(
   [Switch]$invert,
 
   [Parameter(Mandatory=$False)]
-  [string]$outputReportPath
+  [string]$outputReportPath,
 
   [Parameter(Mandatory=$False)]
   [string]$url
