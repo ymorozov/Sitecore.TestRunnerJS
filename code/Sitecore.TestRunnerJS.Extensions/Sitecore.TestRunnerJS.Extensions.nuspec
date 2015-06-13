@@ -16,6 +16,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="App.config.transform" target="content\App.config.transform" />
+    <file src="App.config.install.xdt" target="content\App.config.install.xdt" />
+    <file src="App.config.uninstall.xdt" target="content\App.config.uninstall.xdt" />
   </files>
 </package>

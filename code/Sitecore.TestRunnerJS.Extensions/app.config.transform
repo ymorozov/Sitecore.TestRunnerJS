@@ -1,7 +1,0 @@
-<configuration>
-  <appSettings>
-    <add key="Sitecore.TestRunnerJS.PackagePath" value="path_to_testrunner_package" />
-    <add key="Sitecore.TestRunnerJS.InstanceName" value="name_of_sitecore_instance" />
-    <add key="Sitecore.TestRunnerJS.ApplicationName" value="name_of_speak_application" />
-  </appSettings>
-</configuration>
