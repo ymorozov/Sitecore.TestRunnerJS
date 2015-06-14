@@ -15,7 +15,10 @@ param(
   [Switch]$invert,
 
   [Parameter(Mandatory=$False)]
-  [string]$outputReportPath
+  [string]$outputReportPath,
+
+  [Parameter(Mandatory=$False)]
+  [string]$url
 )
 
 $loaderPath = "$PSScriptRoot\loader.js"
@@ -34,6 +37,10 @@ if($invert){
 
 if($outputReportPath){
   $executionExpression = "$executionExpression -o `"$outputReportPath`""
+}
+
+if($url){
+  $executionExpression = "$executionExpression -u `"$url`""
 }
 
 Invoke-Expression "& $executionExpression"

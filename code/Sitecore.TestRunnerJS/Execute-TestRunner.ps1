@@ -12,7 +12,10 @@ param(
   [Switch]$invert,
 
   [Parameter(Mandatory=$False)]
-  [string]$outputReportPath
+  [string]$outputReportPath,
+
+  [Parameter(Mandatory=$False)]
+  [string]$url
 )
 
 $packages = Split-Path (Split-Path $PSScriptRoot)
@@ -26,4 +29,4 @@ if($phantomPackage -is [system.array])
 $phantomPath = Join-Path ($phantomPackage) tools\phantomjs\phantomjs.exe
 $runnerScript = Join-Path ($PSScriptRoot) sitecore\TestRunnerJS\phantom\run.ps1
 
-&$runnerScript $instanceName $applicationName $phantomPath $grep $invert -outputReportPath $outputReportPath
+&$runnerScript $instanceName $applicationName $phantomPath $grep $invert -outputReportPath $outputReportPath -url $url
