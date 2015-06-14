@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="FileService.cs" />
     <Compile Include="Pipelines\HttpRequest\EnsureTestRunnerEnabled.cs" />
+    <Compile Include="Pipelines\HttpRequest\SwitchUser.cs" />
     <Compile Include="Pipelines\Initialize\RegisterTestRunnerRoutes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ConfigSettings.cs" />
