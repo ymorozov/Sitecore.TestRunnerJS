@@ -43,7 +43,7 @@
       var outputMessage = proc.StandardOutput.ReadToEnd();
       var exitCode = proc.ExitCode;
 
-      return new AgentResult { FailedCount = exitCode, Message = outputMessage };
+      return new AgentResult { FailedCount = exitCode, Message = outputMessage, ErrorMessage = errorMessage};
     }
   }
 }
