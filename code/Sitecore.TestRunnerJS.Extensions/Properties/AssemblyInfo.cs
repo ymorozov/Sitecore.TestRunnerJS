@@ -4,12 +4,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Sitecore.TestRunnerJS")]
-[assembly: AssemblyDescription("Javascript test runner")]
+[assembly: AssemblyTitle("Sitecore.TestRunnerJS.Extensions")]
+[assembly: AssemblyDescription("Javascript test runner extensions")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Yuriy Morozov")]
-[assembly: AssemblyProduct("Sitecore.TestRunnerJS")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyProduct("Sitecore.TestRunnerJS.Extensions")]
+[assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("173be7ad-e663-45f9-8a6e-ab1755e1ae0d")]
+[assembly: Guid("bebb0b28-175d-4330-9c63-64d7b15fb3bb")]
 
 // Version information for an assembly consists of the following four values:
 //

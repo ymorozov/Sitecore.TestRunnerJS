@@ -57,6 +57,7 @@
     <Message Text="Version = $(OutVersion)"/>
     
     <Exec Command="$(NuGet) pack Sitecore.TestRunnerJS/Sitecore.TestRunnerJS.nuspec -Version $(OutVersion) -OutputDirectory ..\$(ReleaseFolder)" WorkingDirectory="$(SourceFolder)" />
+    <Exec Command="$(NuGet) pack Sitecore.TestRunnerJS.Extensions/Sitecore.TestRunnerJS.Extensions.csproj -Version $(OutVersion) -Properties Configuration=Release -OutputDirectory ..\$(ReleaseFolder) -Build -Symbols" WorkingDirectory="$(SourceFolder)" />
   </Target>
 
   <Target Name="StartBuild" DependsOnTargets="NuGetPackage" />

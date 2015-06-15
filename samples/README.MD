@@ -24,3 +24,8 @@ Sample SPEAK application with JS integration tests
 Where:  
 `<instance_name>` - Your website instance name  
 `<app_name>` - Speak application name (SampleApp) 
+
+## Running js integration tests using xUnit or othe C# test frameworks
+1. Open app.config in SampleApp.Tests
+2. Change to the actual values instance name, application name and Sitecore.TestRunnerJS package path settings
+3. Run sample test that is located in SampleTest class

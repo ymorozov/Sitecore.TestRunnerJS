@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Sitecore.TestRunnerJS.Extensions</id>
+    <version>$version$</version>
+    <title>Sitecore.TestRunnerJS.Extensions</title>
+    <authors>Yuriy Morozov</authors>
+    <owners>Yuriy Morozov</owners>
+    <licenseUrl>https://github.com/ymorozov/Sitecore.TestRunnerJS/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/ymorozov/Sitecore.TestRunnerJS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Javascript test runner extensions</description>
+    <tags>Javascript integration test runner SPEAK</tags>
+    <dependencies>
+      <dependency id="Sitecore.TestRunnerJS" version="$version$" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="App.config.install.xdt" target="content\App.config.install.xdt" />
+    <file src="App.config.uninstall.xdt" target="content\App.config.uninstall.xdt" />
+  </files>
+</package>
