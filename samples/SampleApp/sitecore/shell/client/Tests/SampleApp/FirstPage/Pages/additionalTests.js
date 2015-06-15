@@ -18,7 +18,7 @@ define(['sitecore', 'jquery'], function (_sc, $) {
       _sc.app.ValueLabel.once("change:text", mocha.check(function () {
         var text = _sc.app.ValueLabel.get("text");
         expect(text).to.equal("Selected item \"My item 2\" was processed on server");
-      }), done);
+      }, done));
     });
   });
 
