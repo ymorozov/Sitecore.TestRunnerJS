@@ -63,7 +63,7 @@ define(['fakeServer', 'sitecore'], function (server, _sc) {
       _sc.app.ValueLabel.once("change:text", mocha.check(function () {
         var text = _sc.app.ValueLabel.get("text");
         expect(text).to.equal(expectedResponse);
-      }), done);
+      }, done));
     });
   });
 
