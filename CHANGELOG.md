@@ -1,4 +1,7 @@
-﻿0.10.0  
+﻿0.11.0  
+* [NEW] Set default root application path in config   
+
+0.10.0  
 * [NEW] Run JS integration tests from C# test frameworks such as xUnit or NUnit.   
 * [NEW] Create additional Sitecore.TestRunnerJS.Extensions nuget package for additional tasks such as running from C#
 
