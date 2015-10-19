@@ -18,5 +18,10 @@
     {
       get { return Settings.GetSetting("TestRunnerJS.RootTestFixturesFolder", "/TestRunnerJS/Tests"); }
     }
+
+    public virtual string RootApplicationPath
+    {
+      get { return Settings.GetSetting("TestRunnerJS.RootApplicationPath", "/sitecore/client/applications/"); }
+    }
   }
 }
