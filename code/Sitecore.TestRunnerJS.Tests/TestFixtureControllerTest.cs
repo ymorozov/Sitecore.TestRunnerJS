@@ -15,24 +15,29 @@
     public TestFixtureControllerTest()
     {
       this.fileService = Substitute.For<FileService>();
+
       this.settings = Substitute.For<ConfigSettings>();
+      this.settings.RootApplicationPath.Returns("/sitecore/client/applications/");
+
       this.controller = new TestFixtureController(this.fileService, this.settings);
     }
 
-    [Fact]
-    public void ShouldReturnExpectedVirtualPathForFixture()
+    [Theory]
+    [InlineData("http://www.example.com/sitecore/shell/sitecore/client/Applications/SampleApp/FirstPage", "/sitecore/client/applications/")]
+    [InlineData("http://www.example.com/sitecore/shell/sitecore/client/my_custom_folder/SampleApp/FirstPage", "/sitecore/client/my_custom_folder/")]
+    public void ShouldReturnExpectedVirtualPathForFixture(string pageUrl, string rootPath)
     {
       // arrange
-      const string PageUrl = "http://www.example.com/sitecore/shell/sitecore/client/Applications/SampleApp/FirstPage";
       const string ExpectedPath = "my/test/folder/sampleapp/firstpage.js";
 
+      this.settings.RootApplicationPath.Returns(rootPath);
       this.settings.RootTestFixturesFolder.Returns("my/test/folder");
       this.fileService
         .MapPath("~/my/test/folder/sampleapp/firstpage.js")
         .Returns(@"d:\website\my\test\folder\sampleapp\firstpage.js");
 
       // act
-      var result = this.controller.GetByUrl(PageUrl);
+      var result = this.controller.GetByUrl(pageUrl);
 
       // assert
       result.ExpectedPath.Should().Be(ExpectedPath);
@@ -56,20 +61,22 @@
       result.IsExist.Should().Be(isExist);
     }
 
-    [Fact]
-    public void ShouldTakeFileNameFromTestFixtureQueryParameterIfSpecified()
+    [Theory]
+    [InlineData("http://www.example.com/sitecore/shell/sitecore/client/Applications/SampleApp/FirstPage?&sc_testfixture=new", "/sitecore/client/applications/")]
+    [InlineData("http://www.example.com/sitecore/shell/sitecore/client/my_custom_folder/SampleApp/FirstPage?&sc_testfixture=new", "/sitecore/client/my_custom_folder/")]
+    public void ShouldTakeFileNameFromTestFixtureQueryParameterIfSpecified(string pageUrl, string rootPath)
     {
       // arrange
-      const string PageUrl = "http://www.example.com/sitecore/shell/sitecore/client/Applications/SampleApp/FirstPage?&sc_testfixture=new";
       const string ExpectedPath = "my/test/folder/sampleapp/new.js";
 
+      this.settings.RootApplicationPath.Returns(rootPath);
       this.settings.RootTestFixturesFolder.Returns("my/test/folder");
       this.fileService
         .MapPath("~/my/test/folder/sampleapp/new.js")
         .Returns(@"d:\website\my\test\folder\sampleapp\new.js");
       
       // act
-      var result = this.controller.GetByUrl(PageUrl);
+      var result = this.controller.GetByUrl(pageUrl);
 
       // assert
       result.ExpectedPath.Should().Be(ExpectedPath);

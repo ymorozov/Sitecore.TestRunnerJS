@@ -35,7 +35,7 @@
       var queryParameters = HttpUtility.ParseQueryString(uri.Query);
 
       var normalizedUrl = uri.LocalPath.ToLowerInvariant();
-      var applicationUrlParts = normalizedUrl.Split(new[] { @"/sitecore/client/applications/" }, StringSplitOptions.None);
+      var applicationUrlParts = normalizedUrl.Split(new[] { this.settings.RootApplicationPath }, StringSplitOptions.None);
 
       if (applicationUrlParts.Length != 2)
       {
