@@ -1,4 +1,6 @@
-﻿namespace Sitecore.TestRunnerJS.Pipelines.HttpRequest
+﻿using Sitecore.Configuration;
+
+namespace Sitecore.TestRunnerJS.Pipelines.HttpRequest
 {
   using Sitecore.Pipelines.HttpRequest;
   using Sitecore.TestRunnerJS;
@@ -11,7 +13,7 @@
 
     private readonly SitecoreWrapper wrapper;
 
-    private object previousValue;
+    private string previousValue;
 
     public EnsureTestRunnerEnabled(ConfigSettings settings, SitecoreWrapper wrapper)
     {
@@ -21,9 +23,7 @@
 
     public override void Process(HttpRequestArgs args)
     {
-      var settingName = this.settings.RequireJSSettingName;
       var bootstrapPath = this.settings.BootstrapModulePath;
-      var configurationSettings = this.wrapper.GetSitecoreSettings();
 
       if (this.wrapper.GetQueryString(EnableTestRunnerParameter) != "1")
       {
@@ -42,20 +42,20 @@
           return;
         }
 
-        configurationSettings[settingName] = this.previousValue;
+        this.wrapper.SetTestRunnerSetting(this.previousValue);
         this.wrapper.Debugging = false;
 
         return;
       }
 
       this.wrapper.Debugging = true;
-      if ((string)configurationSettings[settingName] == bootstrapPath)
+      if (this.wrapper.GetTestRunnerSetting() == bootstrapPath)
       {
         return;
       }
 
-      this.previousValue = configurationSettings[settingName];
-      configurationSettings[settingName] = bootstrapPath;
+      this.previousValue = this.wrapper.GetTestRunnerSetting();
+      this.wrapper.SetTestRunnerSetting(bootstrapPath);
     }
   }
 }
