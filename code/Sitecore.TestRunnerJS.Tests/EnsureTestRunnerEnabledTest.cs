@@ -1,6 +1,5 @@
 ﻿namespace Sitecore.TestRunnerJS.Tests
 {
-  using System.Collections;
   using FluentAssertions;
   using NSubstitute;
   using Sitecore.TestRunnerJS.Pipelines.HttpRequest;
@@ -14,8 +13,6 @@
 
     private readonly EnsureTestRunnerEnabled processor;
 
-    private readonly Hashtable sitecoreSettings;
-
     private const string RequireJSSettingName = "RequireJSSetting";
 
     private const string RequireJSSettingValue = "RequireJSSettingValue";
@@ -24,14 +21,11 @@
 
     public EnsureTestRunnerEnabledTest()
     {
-      this.sitecoreSettings = new Hashtable { { RequireJSSettingName, RequireJSSettingValue } };
-
-      this.wrapper = Substitute.For<SitecoreWrapper>();
-      this.wrapper.GetSitecoreSettings().Returns(this.sitecoreSettings);
-
       this.settings = Substitute.For<ConfigSettings>();
       this.settings.RequireJSSettingName.Returns(RequireJSSettingName);
       this.settings.BootstrapModulePath.Returns(BootstrapModulePath);
+
+      this.wrapper = Substitute.For<SitecoreWrapper>(this.settings);
 
       this.processor = new EnsureTestRunnerEnabled(this.settings, this.wrapper);
     }
@@ -59,13 +53,14 @@
       this.processor.Process(null);
 
       // assert
-      this.sitecoreSettings[RequireJSSettingName].Should().Be(BootstrapModulePath);
+      this.wrapper.Received().SetTestRunnerSetting(BootstrapModulePath);
     }
 
     [Fact]
     public void ShouldRestoreBootstrapModuleOnTestRunnerDisablingFromQueryString()
     {
       // arrange
+      this.wrapper.GetTestRunnerSetting().Returns(RequireJSSettingValue);
       this.EnableTestRunner();
       this.wrapper.GetQueryString(EnsureTestRunnerEnabled.EnableTestRunnerParameter).Returns("0");
 
@@ -74,7 +69,7 @@
       this.processor.Process(null);
 
       // assert
-      this.sitecoreSettings[RequireJSSettingName].Should().Be(RequireJSSettingValue);
+      this.wrapper.Received().SetTestRunnerSetting(RequireJSSettingValue);
     }
 
     [Fact]

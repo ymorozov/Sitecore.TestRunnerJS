@@ -1,4 +1,6 @@
-﻿namespace Sitecore.TestRunnerJS
+﻿using System;
+
+namespace Sitecore.TestRunnerJS
 {
   using System.Collections;
   using System.Reflection;
@@ -7,17 +9,30 @@
 
   public class SitecoreWrapper
   {
+    private readonly ConfigSettings settings;
+
+    private SettingsSwitcher settingsSwitcher;
+
+    public SitecoreWrapper(ConfigSettings settings)
+    {
+      this.settings = settings;
+    }
+
+
     public virtual bool Debugging
     {
       get { return Context.Diagnostics.Debugging; }
       set { Context.Diagnostics.Debugging = value; }
     }
 
-    public virtual Hashtable GetSitecoreSettings()
+    public virtual void SetTestRunnerSetting(string value)
     {
-      var type = typeof(Settings);
-      var info = type.GetField("settings", BindingFlags.NonPublic | BindingFlags.Static);
-      return (Hashtable)info.GetValue(null);
+      this.settingsSwitcher = new SettingsSwitcher(this.settings.RequireJSSettingName, value); 
+    }
+
+    public virtual string GetTestRunnerSetting()
+    {
+      return Settings.GetSetting(this.settings.RequireJSSettingName);
     }
 
     public virtual string GetQueryString(string key)
