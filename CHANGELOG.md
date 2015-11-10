@@ -1,4 +1,7 @@
-﻿0.11.0  
+﻿0.11.1  
+* [FIX] Use SettingSwitcher instead of Reflection to change setting value 
+
+0.11.0  
 * [NEW] Set default root application path in config   
 
 0.10.0  
