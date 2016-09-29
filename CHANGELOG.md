@@ -1,4 +1,7 @@
-﻿0.11.1  
+﻿0.11.2
+* [FIX] Remove jQuery usage from loader.js
+
+0.11.1  
 * [FIX] Use SettingSwitcher instead of Reflection to change setting value 
 
 0.11.0  
