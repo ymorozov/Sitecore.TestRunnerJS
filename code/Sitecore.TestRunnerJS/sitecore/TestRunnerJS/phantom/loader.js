@@ -398,9 +398,9 @@
       };
 
       loginPage.evaluate(function () {
-        $("#UserName").val("admin");
-        $("#Password").val("b");
-        $(".btn-primary").click();
+        document.getElementById("UserName").value = "admin"
+        document.getElementById("Password").value = "b"
+        document.getElementsByClassName("btn-primary")[0].click();
       });
     });
   }
