@@ -4,26 +4,27 @@ $projects = Get-Project -All
 
 foreach ($project in $projects)
 {
-  $projectName = $project.Name
   $projectPath = Split-Path $project.FileName
-  $path = Join-Path ($projectPath) packages.config
-
-  if (Test-Path $path)
+  if ($projectPath)
   {
-    $xml = [xml]$packages = Get-Content $path
-    foreach ($package in $packages.packages.package)
+    $path = Join-Path ($projectPath) packages.config
+    if (Test-Path $path)
     {
-      $id = $package.id
-      if ($id -eq "Sitecore.TestRunnerJS")
+      $xml = [xml]$packages = Get-Content $path
+      foreach ($package in $packages.packages.package)
       {
-				if (Test-Path "$projectPath\App_Config") {
-					Write-Host "TestRunnerJS files location: $toolsPath"
-					Write-Host "Installation location: $projectPath"
+        $id = $package.id
+        if ($id -eq "Sitecore.TestRunnerJS")
+        {
+          if (Test-Path "$projectPath\App_Config") {
+            Write-Host "TestRunnerJS files location: $toolsPath"
+            Write-Host "Installation location: $projectPath"
 
-					Copy-Item -Path "$toolsPath\*" -Destination "$projectPath" -Exclude "*.ps1" -recurse -Force
-					break
-				}
-			}
+            Copy-Item -Path "$toolsPath\*" -Destination "$projectPath" -Exclude "*.ps1" -recurse -Force
+            break
+          }
+        }
+      }
     }
   }
 }
